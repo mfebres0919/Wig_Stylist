@@ -21,8 +21,8 @@
        a browser without WebP support skips the preload rather than wasting it.
        The smaller accent circle is deliberately not preloaded: it would compete
        with the LCP image for the same bandwidth. -->
-  <link rel="preload" as="image" type="image/webp" href="images/hero/portrait-main-m.webp" media="(max-width: 47.99em)" fetchpriority="high">
-  <link rel="preload" as="image" type="image/webp" href="images/hero/portrait-main.webp" media="(min-width: 48em)" fetchpriority="high">
+  <link rel="preload" as="image" type="image/webp" href="images/hero/hero-mockup-m.webp" media="(max-width: 47.99em)" fetchpriority="high">
+  <link rel="preload" as="image" type="image/webp" href="images/hero/hero-mockup.webp" media="(min-width: 48em)" fetchpriority="high">
 
   <!-- global.css (fonts, tokens, reset, nav, buttons, footer) must load before
        styles.css. Both are render-blocking on purpose: nav + hero are above the fold. -->
@@ -32,7 +32,7 @@
   <!-- Social sharing -->
   <meta property="og:title" content="Hair by Jordan | Houston Wig Stylist">
   <meta property="og:description" content="Custom wig installs, sew-ins, color, and revamps in Houston, Texas.">
-  <meta property="og:image" content="images/hero/portrait-main.jpg">
+  <meta property="og:image" content="images/about/about-jordan.jpg">
   <meta property="og:type" content="website">
 
   <!-- TODO: add favicon files, then reference them here. -->
@@ -186,39 +186,20 @@
           </p>
         </div>
 
-        <!-- Two overlapping circles. Source order matters: the browser takes the
-             first <source> that matches, so desktop WebP is offered before desktop
-             JPG, then mobile WebP, with the mobile JPG on <img> as the last resort. -->
+        <!-- The artwork has an alpha channel, so the fallback is PNG, not JPG:
+             JPG has no transparency and would box the phones in a solid
+             rectangle against the dark hero. Derivatives are generated from
+             images/hero/hero-phone-mockup.png, which stays untouched. -->
         <figure class="hero__portrait">
-
-          <div class="hero__portrait-circle hero__portrait-circle--main">
-            <picture>
-              <source type="image/webp" media="(min-width: 48em)"
-                      srcset="images/hero/portrait-main.webp" width="760" height="760">
-              <source type="image/jpeg" media="(min-width: 48em)"
-                      srcset="images/hero/portrait-main.jpg" width="760" height="760">
-              <source type="image/webp"
-                      srcset="images/hero/portrait-main-m.webp" width="460" height="460">
-              <img src="images/hero/portrait-main-m.jpg" width="460" height="460"
-                   alt="Jordan wearing a reddish-brown body-wave wig styled in loose curls."
-                   fetchpriority="high" decoding="async">
-            </picture>
-          </div>
-
-          <div class="hero__portrait-circle hero__portrait-circle--accent">
-            <picture>
-              <source type="image/webp" media="(min-width: 48em)"
-                      srcset="images/hero/portrait-accent.webp" width="560" height="560">
-              <source type="image/jpeg" media="(min-width: 48em)"
-                      srcset="images/hero/portrait-accent.jpg" width="560" height="560">
-              <source type="image/webp"
-                      srcset="images/hero/portrait-accent-m.webp" width="340" height="340">
-              <img src="images/hero/portrait-accent-m.jpg" width="340" height="340"
-                   alt="Close-up of an auburn body-wave wig with a seamless, natural hairline."
-                   decoding="async">
-            </picture>
-          </div>
-
+          <picture>
+            <source type="image/webp" media="(min-width: 48em)"
+                    srcset="images/hero/hero-mockup.webp" width="777" height="753">
+            <source type="image/webp"
+                    srcset="images/hero/hero-mockup-m.webp" width="512" height="496">
+            <img src="images/hero/hero-mockup-fallback.png" width="486" height="471"
+                 alt="Two phones showing Jordan's work: an ash-brown layered unit and a vivid ginger body-wave install."
+                 fetchpriority="high" decoding="async">
+          </picture>
         </figure>
 
       </div>
@@ -1281,6 +1262,139 @@
 
       <span class="section-divider section-divider--bottom" aria-hidden="true"><svg viewBox="0 0 1000 100" preserveAspectRatio="none" focusable="false"><path d="M1000 0H0v52C62.5 28 125 4 250 4c250 0 250 96 500 96 125 0 187.5-24 250-48V0Z" fill="currentColor"/></svg></span>
 
+    </section>
+
+
+    <!-- ==========================================================================
+         CONTACT
+         The salon photo is a <picture> positioned as a background layer rather
+         than a CSS background-image, so it gets a mobile source, lazy loading
+         and async decoding. A scrim sits over it for text contrast.
+         ========================================================================== -->
+    <section class="section contact" id="contact">
+
+      <picture class="contact__bg">
+        <source type="image/webp" media="(min-width: 48em)"
+                srcset="images/contact/salon-bg.webp" width="736" height="794">
+        <source type="image/jpeg" media="(min-width: 48em)"
+                srcset="images/contact/salon-bg.jpg" width="736" height="794">
+        <source type="image/webp"
+                srcset="images/contact/salon-bg-m.webp" width="480" height="518">
+        <img src="images/contact/salon-bg-m.jpg" width="480" height="518"
+             alt="" loading="lazy" decoding="async">
+      </picture>
+      <span class="contact__scrim" aria-hidden="true"></span>
+
+      <div class="container contact__inner">
+
+        <div class="contact__lead">
+          <p class="section-eyebrow">
+            <span class="section-eyebrow__mark" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                <rect x="4" y="4" width="8" height="8" rx="1.5" fill="currentColor"/>
+              </svg>
+            </span>
+            Contact
+          </p>
+
+          <h2 class="section-title">
+            Let&rsquo;s book your <span class="section-title__accent">next install</span>
+          </h2>
+
+          <p class="section-intro">
+            Tell me what you have in mind &mdash; the look, the length, the date.
+            I answer every message myself, usually within a day.
+          </p>
+
+          <ul class="contact-info">
+            <li class="contact-info__item">
+              <a class="contact-info__link" href="tel:+17135550199">
+                <span class="contact-info__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" focusable="false"><path d="M6.6 3.5h3l1.5 3.8-2 1.3a11.5 11.5 0 0 0 5.3 5.3l1.3-2 3.8 1.5v3a1.8 1.8 0 0 1-2 1.8A15.6 15.6 0 0 1 4.8 5.5a1.8 1.8 0 0 1 1.8-2Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="contact-info__text">
+                  <span class="contact-info__label">Phone Number</span>
+                  <span class="contact-info__value">+1 (713) 555-0199</span>
+                </span>
+              </a>
+            </li>
+            <li class="contact-info__item">
+              <a class="contact-info__link" href="mailto:hello@hairbyjordan.com">
+                <span class="contact-info__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" focusable="false"><rect x="3" y="5.5" width="18" height="13" rx="2.2" stroke="currentColor" stroke-width="1.7"/><path d="m3.8 7 8.2 6 8.2-6" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="contact-info__text">
+                  <span class="contact-info__label">Email Address</span>
+                  <span class="contact-info__value">hello@hairbyjordan.com</span>
+                </span>
+              </a>
+            </li>
+            <li class="contact-info__item">
+              <a class="contact-info__link" href="https://maps.google.com/?q=4400+Westheimer+Rd+Houston+TX">
+                <span class="contact-info__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" focusable="false"><path d="M12 21s7-5.7 7-11a7 7 0 1 0-14 0c0 5.3 7 11 7 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" stroke="currentColor" stroke-width="1.8"/></svg>
+                </span>
+                <span class="contact-info__text">
+                  <span class="contact-info__label">The Studio</span>
+                  <span class="contact-info__value">Suite 210, 4400 Westheimer Rd, Houston, TX</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="contact__card">
+          <h3 class="contact__card-title">Get in touch</h3>
+          <p class="contact__card-intro">
+            Send the details and I&rsquo;ll come back with availability and a quote.
+          </p>
+
+          <!-- TODO: this form has no endpoint yet. Point action= at a form
+               service (Formspree, Netlify Forms, Basin) or your own handler
+               before launch, or nothing will be delivered. -->
+          <form class="contact-form" action="" method="post">
+            <div class="contact-form__grid">
+              <p class="form-field">
+                <label class="visually-hidden" for="first-name">First Name</label>
+                <input class="form-field__input" type="text" id="first-name" name="first-name"
+                       placeholder="First Name" autocomplete="given-name" required>
+              </p>
+              <p class="form-field">
+                <label class="visually-hidden" for="last-name">Last Name</label>
+                <input class="form-field__input" type="text" id="last-name" name="last-name"
+                       placeholder="Last Name" autocomplete="family-name" required>
+              </p>
+              <p class="form-field">
+                <label class="visually-hidden" for="phone">Phone Number</label>
+                <input class="form-field__input" type="tel" id="phone" name="phone"
+                       placeholder="Phone Number" autocomplete="tel">
+              </p>
+              <p class="form-field">
+                <label class="visually-hidden" for="email">Email Address</label>
+                <input class="form-field__input" type="email" id="email" name="email"
+                       placeholder="Email Address" autocomplete="email" required>
+              </p>
+            </div>
+
+            <p class="form-field">
+              <label class="visually-hidden" for="message">Message</label>
+              <textarea class="form-field__input form-field__input--area" id="message"
+                        name="message" rows="5" placeholder="Message" required></textarea>
+            </p>
+
+            <button class="btn btn--primary contact-form__submit" type="submit">
+              <span class="btn__label">Send Message</span>
+              <span class="contact-form__submit-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" focusable="false">
+                  <path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+          </form>
+        </div>
+
+      </div>
     </section>
 
   </main>
