@@ -1057,3 +1057,330 @@
 
   .gallery__track { grid-auto-columns: 24rem; gap: 1.25rem; }
 }
+
+
+/* ==========================================================================
+   7. FAQ
+   Colours come from the .section--light token overrides, same as About.
+   ========================================================================== */
+
+.faq__layout {
+  display: grid;
+  gap: 2rem;
+}
+
+/* --- Category tablist --- */
+
+.faq-cats {
+  padding: 0.5rem 1.25rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.faq-cats__item + .faq-cats__item { border-top: 1px solid var(--color-border); }
+
+.faq-cat {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.0625rem 0;
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-align: left;
+  transition: color var(--speed-fast) var(--ease-out);
+}
+
+.faq-cat:hover { color: var(--color-text); }
+
+.faq-cat[aria-selected="true"] {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+/* Pink dot marking the selected category, hung outside the panel. */
+.faq-cat::before {
+  content: '';
+  position: absolute;
+  left: -1.75rem;
+  top: 50%;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: var(--color-pink);
+  border-radius: 50%;
+  transform: translateY(-50%) scale(0);
+  transition: transform var(--speed) var(--ease-out);
+}
+
+.faq-cat[aria-selected="true"]::before { transform: translateY(-50%) scale(1); }
+
+.faq-cat__icon {
+  display: grid;
+  place-items: center;
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  transition: transform var(--speed) var(--ease-out),
+              color var(--speed-fast) var(--ease-out);
+}
+
+.faq-cat__icon svg { width: 100%; height: 100%; }
+
+.faq-cat:hover .faq-cat__icon,
+.faq-cat[aria-selected="true"] .faq-cat__icon {
+  color: var(--color-pink);
+  transform: translate(2px, -2px);
+}
+
+/* --- Help card --- */
+
+.help-card {
+  overflow: hidden;
+  margin-top: 1.5rem;
+  border-radius: var(--radius-lg);
+}
+
+.help-card__title {
+  padding: 1.125rem 1.5rem;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-size: 1.0625rem;
+  font-weight: 700;
+}
+
+.help-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  background-color: var(--color-pink);
+}
+
+.help-card__row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-white);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  transition: opacity var(--speed-fast) var(--ease-out),
+              transform var(--speed-fast) var(--ease-out);
+}
+
+.help-card__row:hover {
+  opacity: 0.85;
+  transform: translateX(3px);
+}
+
+.help-card__icon {
+  display: grid;
+  place-items: center;
+  width: 1.375rem;
+  height: 1.375rem;
+  flex-shrink: 0;
+}
+
+.help-card__icon svg { width: 100%; height: 100%; }
+
+/* --- Panels --- */
+
+.faq-panel[hidden] { display: none; }
+
+.faq-panel__title {
+  margin-bottom: 1.5rem;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  letter-spacing: -0.02em;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.875rem;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+}
+
+.faq-item {
+  background-color: var(--color-white);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  transition: border-color var(--speed) var(--ease-out);
+}
+
+.faq-item:has(.faq-item__trigger[aria-expanded="true"]) { border-color: var(--color-border-pink); }
+
+.faq-item__heading { font-size: inherit; }
+
+.faq-item__trigger {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.125rem 1.25rem;
+  color: var(--color-text);
+  text-align: left;
+}
+
+.faq-item__q {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.faq-item__n { color: var(--color-pink); }
+
+.faq-item__icon {
+  display: grid;
+  place-items: center;
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+  color: var(--color-pink);
+}
+
+.faq-item__icon svg { width: 100%; height: 100%; }
+
+/* One icon, two states: the vertical bar collapses so + becomes -. */
+.faq-item__icon-bar {
+  transform-origin: center;
+  transition: transform var(--speed) var(--ease-out);
+}
+
+.faq-item__trigger[aria-expanded="true"] .faq-item__icon-bar { transform: scaleY(0); }
+
+/* The answer box must have exactly ONE child for 0fr -> 1fr to collapse it;
+   extra children would each get their own auto-sized implicit row. */
+.faq-item__answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows var(--speed) var(--ease-out),
+              visibility 0s linear var(--speed);
+}
+
+.faq-item__answer-inner { overflow: hidden; }
+
+/* The trigger lives inside the <h4>, so it is NOT the answer's sibling —
+   the heading is. :has() bridges that one level. */
+.faq-item__heading:has(.faq-item__trigger[aria-expanded="true"]) + .faq-item__answer {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows var(--speed) var(--ease-out),
+              visibility 0s linear 0s;
+}
+
+.faq-item__answer p {
+  padding: 0 1.25rem 1.25rem;
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+/* --- Hearts --- */
+
+.hearts--about .heart--1 {
+  top: 12%;
+  right: 5%;
+  width: 2.25rem;
+  opacity: 0.22;
+  --tilt: -18deg;
+  --float-time: 7.2s;
+  --float-delay: 0s;
+}
+
+.hearts--about .heart--2 {
+  bottom: 16%;
+  left: 4%;
+  width: 1.5rem;
+  opacity: 0.18;
+  --tilt: 22deg;
+  --float-time: 5.9s;
+  --float-delay: -2.7s;
+}
+
+.hearts--about .heart--3 {
+  top: 44%;
+  right: 34%;
+  width: 1.125rem;
+  opacity: 0.16;
+  --tilt: -10deg;
+  --float-time: 8.4s;
+  --float-delay: -5s;
+}
+
+.hearts--about .heart--4 {
+  top: 6%;
+  left: 40%;
+  width: 1.375rem;
+  opacity: 0.14;
+  --tilt: 30deg;
+  --float-time: 6.4s;
+  --float-delay: -1.5s;
+}
+
+.hearts--faq .heart--1 {
+  top: 10%;
+  right: 7%;
+  width: 2rem;
+  opacity: 0.18;
+  --tilt: -20deg;
+  --float-time: 7.6s;
+  --float-delay: -0.9s;
+}
+
+.hearts--faq .heart--2 {
+  bottom: 12%;
+  left: 5%;
+  width: 1.5rem;
+  opacity: 0.15;
+  --tilt: 14deg;
+  --float-time: 6.1s;
+  --float-delay: -3.3s;
+}
+
+.hearts--faq .heart--3 {
+  top: 52%;
+  left: 46%;
+  width: 1.125rem;
+  opacity: 0.12;
+  --tilt: -28deg;
+  --float-time: 8.8s;
+  --float-delay: -5.4s;
+}
+
+
+/* ==========================================================================
+   FAQ — 64em and up
+   ========================================================================== */
+
+@media (min-width: 64em) {
+
+  .faq__layout {
+    grid-template-columns: minmax(16rem, 21rem) 1fr;
+    align-items: start;
+    gap: 3rem;
+  }
+
+  /* Sticky, so the column tracks the answers instead of leaving a tall
+     empty gutter once the reader scrolls past it. align-self:start is what
+     lets it stick — a stretched grid item is already full height. */
+  .faq__sidebar {
+    position: sticky;
+    top: calc(var(--header-height) + 1.5rem);
+  }
+
+  .faq-item__q { font-size: 1rem; }
+
+  .faq-list { padding: 1.25rem; gap: 0.875rem; }
+
+  .faq-item__trigger { padding: 1.25rem 1.5rem; }
+
+  .faq-item__answer p { padding: 0 1.5rem 1.5rem; }
+}

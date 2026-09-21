@@ -376,4 +376,65 @@
     sections.forEach(function (section) { observer.observe(section); });
   }
 
+
+  /* ========================================================================
+     10. FAQ
+     A vertical tablist of categories, each panel an accordion. Tabs follow the
+     WAI-ARIA pattern: one tab in the tab order at a time, arrow keys move
+     between them.
+     ======================================================================== */
+
+  Array.prototype.slice.call(document.querySelectorAll('[data-faq]')).forEach(function (faq) {
+
+    var tabs = Array.prototype.slice.call(faq.querySelectorAll('[role="tab"]'));
+    if (!tabs.length) return;
+
+    function selectTab(tab, moveFocus) {
+      tabs.forEach(function (other) {
+        var isTarget = other === tab;
+        other.setAttribute('aria-selected', isTarget ? 'true' : 'false');
+        /* Roving tabindex: only the selected tab is reachable by Tab, so the
+           tablist is one stop rather than five. */
+        other.setAttribute('tabindex', isTarget ? '0' : '-1');
+
+        var panel = document.getElementById(other.getAttribute('aria-controls'));
+        if (panel) panel.hidden = !isTarget;
+      });
+
+      if (moveFocus) tab.focus();
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () { selectTab(tab, false); });
+
+      tab.addEventListener('keydown', function (event) {
+        var i = tabs.indexOf(tab);
+        var next = null;
+
+        if (event.key === 'ArrowDown' || event.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
+        else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') next = tabs[(i - 1 + tabs.length) % tabs.length];
+        else if (event.key === 'Home') next = tabs[0];
+        else if (event.key === 'End') next = tabs[tabs.length - 1];
+        else return;
+
+        event.preventDefault();
+        selectTab(next, true);
+      });
+    });
+
+    /* Accordion: one answer open per panel, matching the closed-by-default
+       look of the rest of the page. */
+    Array.prototype.slice.call(faq.querySelectorAll('.faq-panel')).forEach(function (panel) {
+      var triggers = Array.prototype.slice.call(panel.querySelectorAll('.faq-item__trigger'));
+
+      triggers.forEach(function (trigger) {
+        trigger.addEventListener('click', function () {
+          var wasOpen = trigger.getAttribute('aria-expanded') === 'true';
+          triggers.forEach(function (other) { other.setAttribute('aria-expanded', 'false'); });
+          trigger.setAttribute('aria-expanded', wasOpen ? 'false' : 'true');
+        });
+      });
+    });
+  });
+
 })();

@@ -436,6 +436,13 @@
          ========================================================================== -->
     <section class="section section--light about" id="about">
 
+      <div class="hearts hearts--about" aria-hidden="true">
+        <span class="heart heart--1"></span>
+        <span class="heart heart--2"></span>
+        <span class="heart heart--3"></span>
+        <span class="heart heart--4"></span>
+      </div>
+
       <span class="section-divider section-divider--top" aria-hidden="true"><svg viewBox="0 0 1000 100" preserveAspectRatio="none" focusable="false"><path d="M1000 0H0v52C62.5 28 125 4 250 4c250 0 250 96 500 96 125 0 187.5-24 250-48V0Z" fill="currentColor"/></svg></span>
 
       <div class="container">
@@ -703,6 +710,577 @@
         </div>
 
       </div>
+    </section>
+
+
+    <!-- ==========================================================================
+         FAQ
+         Categories are a vertical tablist; each panel is an accordion. On large
+         screens the sidebar sticks so the column never reads as empty space
+         while the answers scroll past.
+         ========================================================================== -->
+    <section class="section section--light faq" id="faq">
+
+      <span class="section-divider section-divider--top" aria-hidden="true"><svg viewBox="0 0 1000 100" preserveAspectRatio="none" focusable="false"><path d="M1000 0H0v52C62.5 28 125 4 250 4c250 0 250 96 500 96 125 0 187.5-24 250-48V0Z" fill="currentColor"/></svg></span>
+
+      <div class="hearts hearts--faq" aria-hidden="true">
+        <span class="heart heart--1"></span>
+        <span class="heart heart--2"></span>
+        <span class="heart heart--3"></span>
+      </div>
+
+      <div class="container">
+
+        <div class="section-head">
+          <div class="section-head__lead">
+            <p class="section-eyebrow">
+              <span class="section-eyebrow__mark" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                  <path d="M8 1.6v12.8M2.5 4.4l11 7.2M13.5 4.4l-11 7.2" stroke="currentColor"
+                        stroke-width="1.9" stroke-linecap="round"/>
+                </svg>
+              </span>
+              FAQ
+            </p>
+            <h2 class="section-title">Before you <span class="section-title__accent">book</span></h2>
+          </div>
+          <div class="section-head__aside">
+            <p class="section-intro">
+              The questions I get asked most, grouped by topic. If yours
+              isn&rsquo;t here, message me and I&rsquo;ll answer it straight.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq__layout" data-faq>
+
+          <aside class="faq__sidebar">
+            <ul class="faq-cats" role="tablist" aria-label="FAQ categories" aria-orientation="vertical">
+            <li class="faq-cats__item">
+              <button class="faq-cat" type="button" role="tab" id="faq-tab-1"
+                      aria-controls="faq-panel-1" aria-selected="true" tabindex="0">
+                <span class="faq-cat__label">Booking &amp; Appointments</span>
+                <span class="faq-cat__icon" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                    <path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6" stroke="currentColor"
+                          stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </button>
+            </li>
+            <li class="faq-cats__item">
+              <button class="faq-cat" type="button" role="tab" id="faq-tab-2"
+                      aria-controls="faq-panel-2" aria-selected="false" tabindex="-1">
+                <span class="faq-cat__label">Wigs &amp; Hair Quality</span>
+                <span class="faq-cat__icon" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                    <path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6" stroke="currentColor"
+                          stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </button>
+            </li>
+            <li class="faq-cats__item">
+              <button class="faq-cat" type="button" role="tab" id="faq-tab-3"
+                      aria-controls="faq-panel-3" aria-selected="false" tabindex="-1">
+                <span class="faq-cat__label">Pricing &amp; Payment</span>
+                <span class="faq-cat__icon" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                    <path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6" stroke="currentColor"
+                          stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </button>
+            </li>
+            <li class="faq-cats__item">
+              <button class="faq-cat" type="button" role="tab" id="faq-tab-4"
+                      aria-controls="faq-panel-4" aria-selected="false" tabindex="-1">
+                <span class="faq-cat__label">Install &amp; Wear Time</span>
+                <span class="faq-cat__icon" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                    <path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6" stroke="currentColor"
+                          stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </button>
+            </li>
+            <li class="faq-cats__item">
+              <button class="faq-cat" type="button" role="tab" id="faq-tab-5"
+                      aria-controls="faq-panel-5" aria-selected="false" tabindex="-1">
+                <span class="faq-cat__label">Care &amp; Maintenance</span>
+                <span class="faq-cat__icon" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                    <path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6" stroke="currentColor"
+                          stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </button>
+            </li>
+            </ul>
+
+            <div class="help-card">
+              <p class="help-card__title">Do You Need Help?</p>
+              <div class="help-card__body">
+                <a class="help-card__row" href="tel:+17135550199">
+                  <span class="help-card__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" focusable="false">
+                      <path d="M6.6 3.5h3l1.5 3.8-2 1.3a11.5 11.5 0 0 0 5.3 5.3l1.3-2 3.8 1.5v3a1.8 1.8 0 0 1-2 1.8A15.6 15.6 0 0 1 4.8 5.5a1.8 1.8 0 0 1 1.8-2Z"
+                            stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  +1 (713) 555-0199
+                </a>
+                <a class="help-card__row" href="mailto:hello@hairbyjordan.com">
+                  <span class="help-card__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" focusable="false">
+                      <rect x="3" y="5.5" width="18" height="13" rx="2.2" stroke="currentColor" stroke-width="1.7"/>
+                      <path d="m3.8 7 8.2 6 8.2-6" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  hello@hairbyjordan.com
+                </a>
+              </div>
+            </div>
+          </aside>
+
+          <div class="faq__panels">
+          <div class="faq-panel" id="faq-panel-1" role="tabpanel"
+               aria-labelledby="faq-tab-1">
+            <h3 class="faq-panel__title">Booking &amp; Appointments</h3>
+            <ul class="faq-list">
+              <li class="faq-item">
+                <h4 class="faq-item__heading">
+                  <button class="faq-item__trigger" type="button"
+                          aria-expanded="true" aria-controls="faq-a-1-1">
+                    <span class="faq-item__q"><span class="faq-item__n">Q1.</span> How far in advance should I book?</span>
+                    <span class="faq-item__icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                        <path d="M2.5 8h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path class="faq-item__icon-bar" d="M8 2.5v11" stroke="currentColor"
+                              stroke-width="1.8" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                  </button>
+                </h4>
+                <div class="faq-item__answer" id="faq-a-1-1">
+                  <div class="faq-item__answer-inner">
+                    <p>Two to three weeks is typical, and closer to six during prom, homecoming, and the holidays. I only take one client at a time, so the calendar fills quickly.</p>
+                  </div>
+                </div>
+              </li>
+              <li class="faq-item">
+                <h4 class="faq-item__heading">
+                  <button class="faq-item__trigger" type="button"
+                          aria-expanded="false" aria-controls="faq-a-1-2">
+                    <span class="faq-item__q"><span class="faq-item__n">Q2.</span> Do you require a deposit?</span>
+                    <span class="faq-item__icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                        <path d="M2.5 8h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path class="faq-item__icon-bar" d="M8 2.5v11" stroke="currentColor"
+                              stroke-width="1.8" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                  </button>
+                </h4>
+                <div class="faq-item__answer" id="faq-a-1-2">
+                  <div class="faq-item__answer-inner">
+                    <p>Yes &mdash; a non-refundable deposit holds your slot and goes toward your total. It covers the prep work that starts before you ever sit in the chair.</p>
+                  </div>
+                </div>
+              </li>
+              <li class="faq-item">
+                <h4 class="faq-item__heading">
+                  <button class="faq-item__trigger" type="button"
+                          aria-expanded="false" aria-controls="faq-a-1-3">
+                    <span class="faq-item__q"><span class="faq-item__n">Q3.</span> What if I&rsquo;m running late?</span>
+                    <span class="faq-item__icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                        <path d="M2.5 8h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path class="faq-item__icon-bar" d="M8 2.5v11" stroke="currentColor"
+                              stroke-width="1.8" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                  </button>
+                </h4>
+                <div class="faq-item__answer" id="faq-a-1-3">
+                  <div class="faq-item__answer-inner">
+                    <p>There&rsquo;s a 15-minute grace period. Past that I may need to shorten the service or reschedule, because the next client&rsquo;s time is already spoken for.</p>
+                  </div>
+                </div>
+              </li>
+              <li class="faq-item">
+                <h4 class="faq-item__heading">
+                  <button class="faq-item__trigger" type="button"
+                          aria-expanded="false" aria-controls="faq-a-1-4">
+                    <span class="faq-item__q"><span class="faq-item__n">Q4.</span> Can you take a bridal party or group?</span>
+                    <span class="faq-item__icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                        <path d="M2.5 8h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path class="faq-item__icon-bar" d="M8 2.5v11" stroke="currentColor"
+                              stroke-width="1.8" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                  </button>
+                </h4>
+                <div class="faq-item__answer" id="faq-a-1-4">
+                  <div class="faq-item__answer-inner">
+                    <p>I can. Group bookings need more notice and a separate quote, so message me with your date, headcount, and what each person needs.</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="faq-panel" id="faq-panel-2" role="tabpanel"
+               aria-labelledby="faq-tab-2" hidden>
+            <h3 class="faq-panel__title">Wigs &amp; Hair Quality</h3>
+            <ul class="faq-list">
+              <li class="faq-item">
+                <h4 class="faq-item__heading">
+                  <button class="faq-item__trigger" type="button"
+                          aria-expanded="false" aria-controls="faq-a-2-1">
+                    <span class="faq-item__q"><span class="faq-item__n">Q1.</span> Do I need to bring my own unit?</span>
+                    <span class="faq-item__icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                        <path d="M2.5 8h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path class="faq-item__icon-bar" d="M8 2.5v11" stroke="currentColor"
+                              stroke-width="1.8" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                  </button>
+                </h4>
+                <div class="faq-item__answer" id="faq-a-2-1">
+                  <div class="faq-item__answer-inner">
+                    <p>You can bring your own, or I can source one for you. If you&rsquo;d rather I source it, we&rsquo;ll talk length, texture, and budget before I order.</p>
+                  </div>
+                </div>
+              </li>
+              <li class="faq-item">
+                <h4 class="faq-item__heading">
+                  <button class="faq-item__trigger" type="button"
+                          aria-expanded="false" aria-controls="faq-a-2-2">
+                    <span class="faq-item__q"><span class="faq-item__n">Q2.</span> What hair do you recommend?</span>
+                    <span class="faq-item__icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                        <path d="M2.5 8h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path class="faq-item__icon-bar" d="M8 2.5v11" stroke="currentColor"
+                              stroke-width="1.8" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                  </button>
+                </h4>
+                <div class="faq-item__answer" id="faq-a-2-2">
+                  <div class="faq-item__answer-inner">
+                    <p>Raw or virgin bundles with an HD lace closure or frontal. They hold color better, last far longer, and melt more convincingly than synthetic.</p>
+                  </div>
+                </div>
+              </li>
+              <li class="faq-item">
+                <h4 class="faq-item__heading">
+                  <button class="faq-item__trigger" type="button"
+                          aria-expanded="false" aria-controls="faq-a-2-3">
+                    <span class="faq-item__q"><span class="faq-item__n">Q3.</span> Can you work with a unit I bought online?</span>
+                    <span class="faq-item__icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                        <path d="M2.5 8h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path class="faq-item__icon-bar" d="M8 2.5v11" stroke="currentColor"
+                              stroke-width="1.8" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                  </button>
+                </h4>
+                <div class="faq-item__answer" id="faq-a-2-3">
+                  <div class="faq-item__answer-inner">
+                    <p>Absolutely, and I&rsquo;ll tell you honestly what it can and can&rsquo;t do. Some units need plucking, bleaching, or a trim before they&rsquo;ll lay right.</p>
+                  </div>
+                </div>
+              </li>
+              <li class="faq-item">
+                <h4 class="faq-item__heading">
+                  <button class="faq-item__trigger" type="button"
+                          aria-expanded="false" aria-controls="faq-a-2-4">
+                    <span class="faq-item__q"><span class="faq-item__n">Q4.</span> How many bundles do I need?</span>
+                    <span class="faq-item__icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                        <path d="M2.5 8h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path class="faq-item__icon-bar" d="M8 2.5v11" stroke="currentColor"
+                              stroke-width="1.8" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                  </button>
+                </h4>
+                <div class="faq-item__answer" id="faq-a-2-4">
+                  <div class="faq-item__answer-inner">
+                    <p>Three bundles covers most installs up to 24 inches. Past that, or for very full styles, plan on four.</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="faq-panel" id="faq-panel-3" role="tabpanel"
+               aria-labelledby="faq-tab-3" hidden>
+            <h3 class="faq-panel__title">Pricing &amp; Payment</h3>
+            <ul class="faq-list">
+              <li class="faq-item">
+                <h4 class="faq-item__heading">
+                  <button class="faq-item__trigger" type="button"
+                          aria-expanded="false" aria-controls="faq-a-3-1">
+                    <span class="faq-item__q"><span class="faq-item__n">Q1.</span> How much does a custom install cost?</span>
+                    <span class="faq-item__icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                        <path d="M2.5 8h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path class="faq-item__icon-bar" d="M8 2.5v11" stroke="currentColor"
+                              stroke-width="1.8" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                  </button>
+                </h4>
+                <div class="faq-item__answer" id="faq-a-3-1">
+                  <div class="faq-item__answer-inner">
+                    <p>It depends on the service, the length, and whether color is involved. Send me your inspiration photo and I&rsquo;ll quote you before you book.</p>
+                  </div>
+                </div>
+              </li>
+              <li class="faq-item">
+                <h4 class="faq-item__heading">
+                  <button class="faq-item__trigger" type="button"
+                          aria-expanded="false" aria-controls="faq-a-3-2">
+                    <span class="faq-item__q"><span class="faq-item__n">Q2.</span> What payment methods do you take?</span>
+                    <span class="faq-item__icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                        <path d="M2.5 8h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path class="faq-item__icon-bar" d="M8 2.5v11" stroke="currentColor"
+                              stroke-width="1.8" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                  </button>
+                </h4>
+                <div class="faq-item__answer" id="faq-a-3-2">
+                  <div class="faq-item__answer-inner">
+                    <p>Card, Zelle, Cash App, and cash. Deposits are paid online when you book; the balance is due at your appointment.</p>
+                  </div>
+                </div>
+              </li>
+              <li class="faq-item">
+                <h4 class="faq-item__heading">
+                  <button class="faq-item__trigger" type="button"
+                          aria-expanded="false" aria-controls="faq-a-3-3">
+                    <span class="faq-item__q"><span class="faq-item__n">Q3.</span> Is color included in the install price?</span>
+                    <span class="faq-item__icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                        <path d="M2.5 8h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path class="faq-item__icon-bar" d="M8 2.5v11" stroke="currentColor"
+                              stroke-width="1.8" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                  </button>
+                </h4>
+                <div class="faq-item__answer" id="faq-a-3-3">
+                  <div class="faq-item__answer-inner">
+                    <p>No &mdash; coloring and customization are priced separately, because the time involved varies enormously between a root touch-up and a full lift.</p>
+                  </div>
+                </div>
+              </li>
+              <li class="faq-item">
+                <h4 class="faq-item__heading">
+                  <button class="faq-item__trigger" type="button"
+                          aria-expanded="false" aria-controls="faq-a-3-4">
+                    <span class="faq-item__q"><span class="faq-item__n">Q4.</span> Do you offer payment plans?</span>
+                    <span class="faq-item__icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                        <path d="M2.5 8h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path class="faq-item__icon-bar" d="M8 2.5v11" stroke="currentColor"
+                              stroke-width="1.8" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                  </button>
+                </h4>
+                <div class="faq-item__answer" id="faq-a-3-4">
+                  <div class="faq-item__answer-inner">
+                    <p>For larger services, yes. Ask when you book and we&rsquo;ll split it across the deposit and the appointment.</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="faq-panel" id="faq-panel-4" role="tabpanel"
+               aria-labelledby="faq-tab-4" hidden>
+            <h3 class="faq-panel__title">Install &amp; Wear Time</h3>
+            <ul class="faq-list">
+              <li class="faq-item">
+                <h4 class="faq-item__heading">
+                  <button class="faq-item__trigger" type="button"
+                          aria-expanded="false" aria-controls="faq-a-4-1">
+                    <span class="faq-item__q"><span class="faq-item__n">Q1.</span> How long does an install take?</span>
+                    <span class="faq-item__icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                        <path d="M2.5 8h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path class="faq-item__icon-bar" d="M8 2.5v11" stroke="currentColor"
+                              stroke-width="1.8" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                  </button>
+                </h4>
+                <div class="faq-item__answer" id="faq-a-4-1">
+                  <div class="faq-item__answer-inner">
+                    <p>Most installs run three to five hours. Color, cutting, or a full customization can push it longer &mdash; I&rsquo;ll tell you what to expect when you book.</p>
+                  </div>
+                </div>
+              </li>
+              <li class="faq-item">
+                <h4 class="faq-item__heading">
+                  <button class="faq-item__trigger" type="button"
+                          aria-expanded="false" aria-controls="faq-a-4-2">
+                    <span class="faq-item__q"><span class="faq-item__n">Q2.</span> How long can I wear it?</span>
+                    <span class="faq-item__icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                        <path d="M2.5 8h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path class="faq-item__icon-bar" d="M8 2.5v11" stroke="currentColor"
+                              stroke-width="1.8" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                  </button>
+                </h4>
+                <div class="faq-item__answer" id="faq-a-4-2">
+                  <div class="faq-item__answer-inner">
+                    <p>Two to four weeks for a glued frontal, and up to six for a sew-in with proper maintenance. Longer than that and your natural hair pays for it.</p>
+                  </div>
+                </div>
+              </li>
+              <li class="faq-item">
+                <h4 class="faq-item__heading">
+                  <button class="faq-item__trigger" type="button"
+                          aria-expanded="false" aria-controls="faq-a-4-3">
+                    <span class="faq-item__q"><span class="faq-item__n">Q3.</span> Will it damage my natural hair?</span>
+                    <span class="faq-item__icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                        <path d="M2.5 8h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path class="faq-item__icon-bar" d="M8 2.5v11" stroke="currentColor"
+                              stroke-width="1.8" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                  </button>
+                </h4>
+                <div class="faq-item__answer" id="faq-a-4-3">
+                  <div class="faq-item__answer-inner">
+                    <p>Not when it&rsquo;s installed and removed properly. Your braid pattern is done with your edges and tension in mind, and I never install over hair that isn&rsquo;t ready.</p>
+                  </div>
+                </div>
+              </li>
+              <li class="faq-item">
+                <h4 class="faq-item__heading">
+                  <button class="faq-item__trigger" type="button"
+                          aria-expanded="false" aria-controls="faq-a-4-4">
+                    <span class="faq-item__q"><span class="faq-item__n">Q4.</span> Can I work out with my install?</span>
+                    <span class="faq-item__icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                        <path d="M2.5 8h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path class="faq-item__icon-bar" d="M8 2.5v11" stroke="currentColor"
+                              stroke-width="1.8" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                  </button>
+                </h4>
+                <div class="faq-item__answer" id="faq-a-4-4">
+                  <div class="faq-item__answer-inner">
+                    <p>You can. Wrap your hair at night, keep your scalp clean, and come in for maintenance a little sooner than someone who doesn&rsquo;t sweat it out daily.</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="faq-panel" id="faq-panel-5" role="tabpanel"
+               aria-labelledby="faq-tab-5" hidden>
+            <h3 class="faq-panel__title">Care &amp; Maintenance</h3>
+            <ul class="faq-list">
+              <li class="faq-item">
+                <h4 class="faq-item__heading">
+                  <button class="faq-item__trigger" type="button"
+                          aria-expanded="false" aria-controls="faq-a-5-1">
+                    <span class="faq-item__q"><span class="faq-item__n">Q1.</span> How do I wash my unit?</span>
+                    <span class="faq-item__icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                        <path d="M2.5 8h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path class="faq-item__icon-bar" d="M8 2.5v11" stroke="currentColor"
+                              stroke-width="1.8" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                  </button>
+                </h4>
+                <div class="faq-item__answer" id="faq-a-5-1">
+                  <div class="faq-item__answer-inner">
+                    <p>Cool water, sulfate-free shampoo, and always downward &mdash; never scrub in circles. Condition the ends, keep product off the lace, and air dry.</p>
+                  </div>
+                </div>
+              </li>
+              <li class="faq-item">
+                <h4 class="faq-item__heading">
+                  <button class="faq-item__trigger" type="button"
+                          aria-expanded="false" aria-controls="faq-a-5-2">
+                    <span class="faq-item__q"><span class="faq-item__n">Q2.</span> What products should I use?</span>
+                    <span class="faq-item__icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                        <path d="M2.5 8h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path class="faq-item__icon-bar" d="M8 2.5v11" stroke="currentColor"
+                              stroke-width="1.8" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                  </button>
+                </h4>
+                <div class="faq-item__answer" id="faq-a-5-2">
+                  <div class="faq-item__answer-inner">
+                    <p>Light leave-ins and heat protectant. Skip anything heavy or oil-based near the lace; it breaks down the adhesive and shortens your melt.</p>
+                  </div>
+                </div>
+              </li>
+              <li class="faq-item">
+                <h4 class="faq-item__heading">
+                  <button class="faq-item__trigger" type="button"
+                          aria-expanded="false" aria-controls="faq-a-5-3">
+                    <span class="faq-item__q"><span class="faq-item__n">Q3.</span> How often should I come in?</span>
+                    <span class="faq-item__icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                        <path d="M2.5 8h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path class="faq-item__icon-bar" d="M8 2.5v11" stroke="currentColor"
+                              stroke-width="1.8" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                  </button>
+                </h4>
+                <div class="faq-item__answer" id="faq-a-5-3">
+                  <div class="faq-item__answer-inner">
+                    <p>Every two to three weeks for a refresh on a frontal, every four to six for a sew-in. Maintenance is what keeps a unit looking new.</p>
+                  </div>
+                </div>
+              </li>
+              <li class="faq-item">
+                <h4 class="faq-item__heading">
+                  <button class="faq-item__trigger" type="button"
+                          aria-expanded="false" aria-controls="faq-a-5-4">
+                    <span class="faq-item__q"><span class="faq-item__n">Q4.</span> Can you revamp an old unit?</span>
+                    <span class="faq-item__icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                        <path d="M2.5 8h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path class="faq-item__icon-bar" d="M8 2.5v11" stroke="currentColor"
+                              stroke-width="1.8" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                  </button>
+                </h4>
+                <div class="faq-item__answer" id="faq-a-5-4">
+                  <div class="faq-item__answer-inner">
+                    <p>That&rsquo;s one of my favorite services. Washed, deep conditioned, re-plucked, and restyled &mdash; most units come back looking close to new.</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          </div>
+
+        </div>
+      </div>
+
+      <span class="section-divider section-divider--bottom" aria-hidden="true"><svg viewBox="0 0 1000 100" preserveAspectRatio="none" focusable="false"><path d="M1000 0H0v52C62.5 28 125 4 250 4c250 0 250 96 500 96 125 0 187.5-24 250-48V0Z" fill="currentColor"/></svg></span>
+
     </section>
 
   </main>

@@ -929,11 +929,16 @@ p { text-wrap: pretty; }
   --glow-pink: 0 0 32px rgba(232, 44, 214, 0.22);
 
   position: relative;
+  overflow: hidden;      /* keeps the decorative hearts inside the section */
   background-color: var(--color-white);
   color: var(--color-text);
   /* Room for the wave dividers, which overlap the section's own edges. */
   padding-block: calc(var(--section-spacing) + 2rem);
 }
+
+/* The hearts layer is absolutely positioned, so in-flow content would paint
+   beneath it without this. */
+.section--light > .container { position: relative; z-index: 1; }
 
 /* The outlined button is white-on-dark by default; on white it needs ink. */
 .section--light .btn--secondary {
@@ -958,6 +963,7 @@ p { text-wrap: pretty; }
   position: absolute;
   left: 0;
   right: 0;
+  z-index: 2;            /* above both the hearts layer and the content */
   display: block;
   height: clamp(2.5rem, 6vw, 5.5rem);
   color: var(--color-black);   /* matches the dark sections above and below */
