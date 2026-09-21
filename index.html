@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Hair by Jordan | Custom Wig Installs &amp; Color in Houston, TX</title>
+  <meta name="description" content="Hair by Jordan is a Houston, Texas wig stylist specializing in custom wig installs, frontal and closure sew-ins, custom color, and wig revamps. Book your appointment today.">
+
+  <!-- ==========================================================================
+       PERFORMANCE: preload above-the-fold assets only
+       ========================================================================== -->
+
+  <!-- Only the two weights the hero + nav actually paint above the fold.
+       Preloading every weight would compete with the LCP image for bandwidth. -->
+  <link rel="preload" href="fonts/poppins-v24-latin-800.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/poppins-v24-latin-600.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- The large portrait is the LCP element. Each viewport preloads only the crop
+       it will actually render, so mobile never touches the 760px file. type= means
+       a browser without WebP support skips the preload rather than wasting it.
+       The smaller accent circle is deliberately not preloaded: it would compete
+       with the LCP image for the same bandwidth. -->
+  <link rel="preload" as="image" type="image/webp" href="images/hero/portrait-main-m.webp" media="(max-width: 47.99em)" fetchpriority="high">
+  <link rel="preload" as="image" type="image/webp" href="images/hero/portrait-main.webp" media="(min-width: 48em)" fetchpriority="high">
+
+  <!-- global.css (fonts, tokens, reset, nav, buttons, footer) must load before
+       styles.css. Both are render-blocking on purpose: nav + hero are above the fold. -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Social sharing -->
+  <meta property="og:title" content="Hair by Jordan | Houston Wig Stylist">
+  <meta property="og:description" content="Custom wig installs, sew-ins, color, and revamps in Houston, Texas.">
+  <meta property="og:image" content="images/hero/portrait-main.jpg">
+  <meta property="og:type" content="website">
+
+  <!-- TODO: add favicon files, then reference them here. -->
+</head>
+
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ==========================================================================
+       SITE HEADER / NAVIGATION
+       Sticky + transparent over the hero. global.js adds .is-scrolled once the
+       page moves, which fades in the blurred backdrop.
+       ========================================================================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="site-header__inner">
+
+      <a class="site-logo" href="#hero">
+        <span class="site-logo__mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" focusable="false">
+            <path d="M16 2c5 4.5 8 9 8 14a8 8 0 0 1-16 0c0-5 3-9.5 8-14Z" fill="currentColor"/>
+            <path d="M16 9c2.4 2.4 3.8 4.6 3.8 7a3.8 3.8 0 0 1-7.6 0c0-2.4 1.4-4.6 3.8-7Z" fill="#0B0B0D"/>
+          </svg>
+        </span>
+        <span class="site-logo__text">Hair by <em>Jordan</em></span>
+      </a>
+
+      <!-- Hamburger: hidden from 64em up, where the full bar takes over. -->
+      <button class="nav-toggle" id="navToggle" type="button"
+              aria-expanded="false" aria-controls="primaryNav" aria-label="Open menu">
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Main">
+        <ul class="primary-nav__list">
+
+          <li class="primary-nav__item"><a class="primary-nav__link" href="#hero">Home</a></li>
+          <li class="primary-nav__item"><a class="primary-nav__link" href="#about">About</a></li>
+
+          <!-- Services is a <button>, not a link, so the submenu is reachable by
+               keyboard and tap. Desktop also opens it on hover via CSS. -->
+          <li class="primary-nav__item has-dropdown" data-dropdown>
+            <button class="primary-nav__link primary-nav__toggle" type="button"
+                    aria-expanded="false" aria-controls="servicesMenu">
+              Services
+              <span class="primary-nav__chevron" aria-hidden="true">
+                <svg viewBox="0 0 12 8" fill="none" focusable="false">
+                  <path d="M1 1.5 6 6.5l5-5" stroke="currentColor" stroke-width="1.8"
+                        stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+
+            <div class="dropdown" id="servicesMenu">
+              <ul class="dropdown__list">
+                <li><a class="dropdown__link" href="#services">Custom Wig Installs</a></li>
+                <li><a class="dropdown__link" href="#services">Frontal &amp; Closure Sew-Ins</a></li>
+                <li><a class="dropdown__link" href="#services">Color &amp; Customization</a></li>
+                <li><a class="dropdown__link" href="#services">Wig Revamp &amp; Maintenance</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="primary-nav__item"><a class="primary-nav__link" href="#gallery">Gallery</a></li>
+          <li class="primary-nav__item"><a class="primary-nav__link" href="#faq">FAQ</a></li>
+          <li class="primary-nav__item"><a class="primary-nav__link" href="#contact">Contact</a></li>
+        </ul>
+
+        <ul class="social-links" aria-label="Social media">
+          <li>
+            <a class="social-links__link" href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" focusable="false" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/>
+                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/>
+                <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a class="social-links__link" href="#" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="none" focusable="false" aria-hidden="true">
+                <path d="M14.5 8.5h2.2V5.6h-2.6c-2.4 0-3.9 1.5-3.9 4v2H8v3h2.2V21h3.1v-6.4h2.4l.5-3h-2.9v-1.6c0-1 .4-1.5 1.2-1.5Z" fill="currentColor"/>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a class="social-links__link" href="#" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" fill="none" focusable="false" aria-hidden="true">
+                <path d="M14 3h2.6a5.1 5.1 0 0 0 4.4 4.3v2.7a7.8 7.8 0 0 1-4.3-1.4v6.2a5.9 5.9 0 1 1-5.9-5.9c.3 0 .6 0 .9.1v2.8a3.1 3.1 0 1 0 2.2 3V3Z" fill="currentColor"/>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Closes the mobile menu on an outside tap. Inert until the menu opens. -->
+  <div class="nav-scrim" id="navScrim" hidden></div>
+
+  <main id="main">
+
+    <!-- ==========================================================================
+         HERO
+         ========================================================================== -->
+    <section class="hero" id="hero">
+
+      <!-- Decoration only. One SVG file, tinted pink through a CSS mask and
+           reused at six sizes, so there is no per-heart asset. -->
+      <div class="hero__hearts" aria-hidden="true">
+        <span class="hero__heart hero__heart--1"></span>
+        <span class="hero__heart hero__heart--2"></span>
+        <span class="hero__heart hero__heart--3"></span>
+        <span class="hero__heart hero__heart--4"></span>
+        <span class="hero__heart hero__heart--5"></span>
+        <span class="hero__heart hero__heart--6"></span>
+      </div>
+
+      <div class="hero__inner">
+
+        <div class="hero__content">
+          <h1 class="hero__title">
+            <span class="hero__title-top">Hair by</span>
+            <span class="hero__title-name">Jordan</span>
+          </h1>
+
+          <p class="hero__tagline">
+            Custom wig installs, flawless melts, and color that turns heads &mdash;
+            crafted strand by strand for the woman who never blends in.
+          </p>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#contact">
+              <span class="btn__label">Book Now</span>
+            </a>
+            <a class="btn btn--secondary" href="#services">
+              <span class="btn__label">View Services</span>
+            </a>
+          </div>
+
+          <p class="hero__location">
+            <span class="hero__location-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" focusable="false">
+                <path d="M12 21s7-5.7 7-11a7 7 0 1 0-14 0c0 5.3 7 11 7 11Z"
+                      stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/>
+                <circle cx="12" cy="10" r="2.6" stroke="currentColor" stroke-width="1.9"/>
+              </svg>
+            </span>
+            Houston, Texas
+          </p>
+        </div>
+
+        <!-- Two overlapping circles. Source order matters: the browser takes the
+             first <source> that matches, so desktop WebP is offered before desktop
+             JPG, then mobile WebP, with the mobile JPG on <img> as the last resort. -->
+        <figure class="hero__portrait">
+
+          <div class="hero__portrait-circle hero__portrait-circle--main">
+            <picture>
+              <source type="image/webp" media="(min-width: 48em)"
+                      srcset="images/hero/portrait-main.webp" width="760" height="760">
+              <source type="image/jpeg" media="(min-width: 48em)"
+                      srcset="images/hero/portrait-main.jpg" width="760" height="760">
+              <source type="image/webp"
+                      srcset="images/hero/portrait-main-m.webp" width="460" height="460">
+              <img src="images/hero/portrait-main-m.jpg" width="460" height="460"
+                   alt="Jordan wearing a reddish-brown body-wave wig styled in loose curls."
+                   fetchpriority="high" decoding="async">
+            </picture>
+          </div>
+
+          <div class="hero__portrait-circle hero__portrait-circle--accent">
+            <picture>
+              <source type="image/webp" media="(min-width: 48em)"
+                      srcset="images/hero/portrait-accent.webp" width="560" height="560">
+              <source type="image/jpeg" media="(min-width: 48em)"
+                      srcset="images/hero/portrait-accent.jpg" width="560" height="560">
+              <source type="image/webp"
+                      srcset="images/hero/portrait-accent-m.webp" width="340" height="340">
+              <img src="images/hero/portrait-accent-m.jpg" width="340" height="340"
+                   alt="Close-up of an auburn body-wave wig with a seamless, natural hairline."
+                   decoding="async">
+            </picture>
+          </div>
+
+        </figure>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================================================
+         MARQUEE
+         The track holds two identical groups and slides one full group's width,
+         so the loop is seamless. The second group is a visual duplicate and is
+         hidden from screen readers.
+         ========================================================================== -->
+    <section class="marquee" aria-label="What we offer">
+      <div class="marquee__track">
+        <ul class="marquee__group">
+          <li class="marquee__item">Custom Wig Installs</li>
+          <li class="marquee__item">Frontal Sew-Ins</li>
+          <li class="marquee__item">Color &amp; Customization</li>
+          <li class="marquee__item">Wig Revamps</li>
+          <li class="marquee__item">Bridal &amp; Events</li>
+          <li class="marquee__item">Houston, Texas</li>
+        </ul>
+        <ul class="marquee__group" aria-hidden="true">
+          <li class="marquee__item">Custom Wig Installs</li>
+          <li class="marquee__item">Frontal Sew-Ins</li>
+          <li class="marquee__item">Color &amp; Customization</li>
+          <li class="marquee__item">Wig Revamps</li>
+          <li class="marquee__item">Bridal &amp; Events</li>
+          <li class="marquee__item">Houston, Texas</li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ==========================================================================
+         SERVICES
+         ========================================================================== -->
+    <section class="section services" id="services">
+      <div class="container">
+
+        <div class="section-head">
+          <div class="section-head__lead">
+            <p class="section-eyebrow">
+              <span class="section-eyebrow__mark" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                  <path d="M8 1.6v12.8M2.5 4.4l11 7.2M13.5 4.4l-11 7.2" stroke="currentColor"
+                        stroke-width="1.9" stroke-linecap="round"/>
+                </svg>
+              </span>
+              Services
+            </p>
+            <h2 class="section-title">Our popular <span class="section-title__accent">services</span></h2>
+          </div>
+
+          <div class="section-head__aside">
+            <p class="section-intro">
+              Every install is booked one-on-one, never double-stacked. Pick the
+              service that fits what you came for &mdash; or message me and we&rsquo;ll
+              figure it out together.
+            </p>
+            <a class="btn btn--primary" href="#contact">
+              <span class="btn__label">Book Appointment</span>
+            </a>
+          </div>
+        </div>
+
+        <ul class="services__grid">
+          <li class="service-card">
+            <div class="service-card__media">
+              <picture>
+                <source type="image/webp" srcset="images/services/custom-installs.webp" width="640" height="480">
+                <img src="images/services/custom-installs.jpg" width="640" height="480"
+                     alt="Close-up of a deep burgundy body-wave wig with a seamless lace melt." loading="lazy" decoding="async">
+              </picture>
+            </div>
+
+            <div class="service-card__body">
+              <span class="service-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" focusable="false"><circle cx="12" cy="9" r="5.2" stroke="currentColor" stroke-width="1.7"/><path d="M4.6 21c.6-4.2 3.5-6.6 7.4-6.6s6.8 2.4 7.4 6.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              </span>
+              <h3 class="service-card__title">Custom Wig Installs</h3>
+              <p class="service-card__text">A seamless melt, bleached knots, and a hairline so natural nobody asks. Cut and styled to your face shape.</p>
+            </div>
+
+            <a class="service-card__cta" href="#contact">
+              <span class="service-card__cta-label">Book Now</span>
+              <span class="service-card__cta-icon" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                  <path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6" stroke="currentColor"
+                        stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </a>
+          </li>
+
+          <li class="service-card">
+            <div class="service-card__media">
+              <picture>
+                <source type="image/webp" srcset="images/services/sew-ins.webp" width="640" height="480">
+                <img src="images/services/sew-ins.jpg" width="640" height="480"
+                     alt="Auburn frontal sew-in styled with a deep side part and soft waves." loading="lazy" decoding="async">
+              </picture>
+            </div>
+
+            <div class="service-card__body">
+              <span class="service-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" focusable="false"><path d="M3 7.5h18M3 12h18M3 16.5h18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M7.5 3v18M16.5 3v18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" opacity=".45"/></svg>
+              </span>
+              <h3 class="service-card__title">Frontal &amp; Closure Sew-Ins</h3>
+              <p class="service-card__text">Protective, flat, and built to last. Braided down with care so your natural hair grows while you slay.</p>
+            </div>
+
+            <a class="service-card__cta" href="#contact">
+              <span class="service-card__cta-label">Book Now</span>
+              <span class="service-card__cta-icon" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                  <path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6" stroke="currentColor"
+                        stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </a>
+          </li>
+
+          <li class="service-card">
+            <div class="service-card__media">
+              <picture>
+                <source type="image/webp" srcset="images/services/color.webp" width="640" height="480">
+                <img src="images/services/color.jpg" width="640" height="480"
+                     alt="Rich copper-brown wig showing a custom colour melt under warm light." loading="lazy" decoding="async">
+              </picture>
+            </div>
+
+            <div class="service-card__body">
+              <span class="service-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" focusable="false"><path d="M12 3.2s5.6 5.4 5.6 9a5.6 5.6 0 1 1-11.2 0c0-3.6 5.6-9 5.6-9Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9.4 13.6a2.6 2.6 0 0 0 2.6 2.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              </span>
+              <h3 class="service-card__title">Color &amp; Customization</h3>
+              <p class="service-card__text">Custom color, plucking, bleaching, and layers. Bring your inspiration photo and leave with the real thing.</p>
+            </div>
+
+            <a class="service-card__cta" href="#contact">
+              <span class="service-card__cta-label">Book Now</span>
+              <span class="service-card__cta-icon" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                  <path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6" stroke="currentColor"
+                        stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </a>
+          </li>
+
+          <li class="service-card">
+            <div class="service-card__media">
+              <picture>
+                <source type="image/webp" srcset="images/services/revamp.webp" width="640" height="480">
+                <img src="images/services/revamp.jpg" width="640" height="480"
+                     alt="Freshly revamped honey-blonde wig with restored shine and body." loading="lazy" decoding="async">
+              </picture>
+            </div>
+
+            <div class="service-card__body">
+              <span class="service-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" focusable="false"><path d="M20 12a8 8 0 1 1-2.6-5.9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M20 3.6V8h-4.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <h3 class="service-card__title">Wig Revamp &amp; Maintenance</h3>
+              <p class="service-card__text">Washed, deep conditioned, and restyled. We bring a tired unit back to the day you bought it.</p>
+            </div>
+
+            <a class="service-card__cta" href="#contact">
+              <span class="service-card__cta-label">Book Now</span>
+              <span class="service-card__cta-icon" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                  <path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6" stroke="currentColor"
+                        stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </a>
+          </li>
+        </ul>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================================================
+         ABOUT
+         The one light section on the page. Rather than overriding every colour,
+         it redefines the theme tokens on itself, so buttons, cards and type
+         invert automatically. The wave dividers carry the dark sections above
+         and below into it.
+         ========================================================================== -->
+    <section class="section section--light about" id="about">
+
+      <span class="section-divider section-divider--top" aria-hidden="true"><svg viewBox="0 0 1000 100" preserveAspectRatio="none" focusable="false"><path d="M1000 0H0v52C62.5 28 125 4 250 4c250 0 250 96 500 96 125 0 187.5-24 250-48V0Z" fill="currentColor"/></svg></span>
+
+      <div class="container">
+
+        <div class="about__grid">
+
+          <div class="about__media">
+            <figure class="about__photo">
+              <picture>
+                <source type="image/webp" media="(min-width: 48em)"
+                        srcset="images/about/about-jordan.webp" width="640" height="800">
+                <source type="image/jpeg" media="(min-width: 48em)"
+                        srcset="images/about/about-jordan.jpg" width="640" height="800">
+                <source type="image/webp"
+                        srcset="images/about/about-jordan-m.webp" width="460" height="575">
+                <img src="images/about/about-jordan-m.jpg" width="460" height="575"
+                     alt="Jordan, wig stylist, wearing a reddish-brown body-wave unit she installed."
+                     loading="lazy" decoding="async">
+              </picture>
+            </figure>
+
+            <!-- Circular badge. The text rides an SVG path, so it curves for real
+                 instead of being a picture of curved text. -->
+            <div class="about__badge">
+              <svg viewBox="0 0 120 120" focusable="false" aria-hidden="true">
+                <defs>
+                  <path id="badgeArc" fill="none"
+                        d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0"/>
+                </defs>
+                <text class="about__badge-text">
+                  <textPath href="#badgeArc" startOffset="0%">
+                    5+ YEARS OF WIG ARTISTRY &#183; HOUSTON, TX &#183;
+                  </textPath>
+                </text>
+              </svg>
+              <span class="about__badge-value">5<small>+</small></span>
+              <span class="visually-hidden">Five or more years of wig artistry in Houston, Texas.</span>
+            </div>
+          </div>
+
+          <div class="about__content">
+            <p class="section-eyebrow">
+              <span class="section-eyebrow__mark" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                  <path d="M8 1.6v12.8M2.5 4.4l11 7.2M13.5 4.4l-11 7.2" stroke="currentColor"
+                        stroke-width="1.9" stroke-linecap="round"/>
+                </svg>
+              </span>
+              About Me
+            </p>
+
+            <h2 class="section-title">
+              Crafted by <span class="section-title__accent">hand</span>.
+              Trusted across <span class="section-title__accent">Houston</span>.
+            </h2>
+
+            <p class="about__lede">
+              I&rsquo;m Jordan, and I&rsquo;ve been installing and customizing units in
+              Houston for over five years. What started as doing my own hair in a
+              dorm mirror turned into a chair that stays booked &mdash; because I
+              treat every unit like it&rsquo;s going on my own head. No rushed melts,
+              no cookie-cutter installs, no leaving you with something you
+              don&rsquo;t know how to maintain.
+            </p>
+
+            <div class="about__actions">
+              <a class="btn btn--primary" href="#contact">
+                <span class="btn__label">More About Me</span>
+              </a>
+
+              <div class="about__stylist">
+                <img class="about__stylist-avatar" src="images/about/about-avatar.jpg"
+                     width="128" height="128" alt="" loading="lazy" decoding="async">
+                <span class="about__stylist-meta">
+                  <span class="about__stylist-name">Jordan</span>
+                  <span class="about__stylist-role">Licensed Stylist &amp; Wig Specialist</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <ul class="about__facts">
+          <li class="fact-card">
+            <span class="fact-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" focusable="false"><path d="M12 3.4 4.8 6.6v5.1c0 4.3 3 8.3 7.2 9.3 4.2-1 7.2-5 7.2-9.3V6.6L12 3.4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m9 12 2.1 2.1L15.3 10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <h3 class="fact-card__title">My Promise</h3>
+            <p class="fact-card__text">One client at a time, never double-booked. You get my full attention from wash to final curl.</p>
+          </li>
+          <li class="fact-card">
+            <span class="fact-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" focusable="false"><circle cx="12" cy="12" r="8.4" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="3.4" stroke="currentColor" stroke-width="1.7"/><path d="M12 1.8v3M12 19.2v3M22.2 12h-3M4.8 12h-3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </span>
+            <h3 class="fact-card__title">My Approach</h3>
+            <p class="fact-card__text">Your face shape, your lifestyle, your budget. We plan the unit together before a single knot gets bleached.</p>
+          </li>
+          <li class="fact-card fact-card--stat">
+            <p class="fact-card__value">500<span>+</span></p>
+            <p class="fact-card__label">units installed</p>
+          </li>
+        </ul>
+
+      </div>
+
+      <span class="section-divider section-divider--bottom" aria-hidden="true"><svg viewBox="0 0 1000 100" preserveAspectRatio="none" focusable="false"><path d="M1000 0H0v52C62.5 28 125 4 250 4c250 0 250 96 500 96 125 0 187.5-24 250-48V0Z" fill="currentColor"/></svg></span>
+
+    </section>
+
+  </main>
+
+  <!-- Appears once the page has scrolled past the hero. -->
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" focusable="false" aria-hidden="true">
+      <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.1"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <script src="javascript/global.js" defer></script>
+</body>
+</html>

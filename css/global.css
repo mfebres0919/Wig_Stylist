@@ -1,0 +1,978 @@
+/* ==========================================================================
+   HAIR BY JORDAN — global.css
+   Fonts, design tokens, reset, navigation, buttons, and the utilities shared
+   by every section. Loads BEFORE styles.css.
+
+   Mobile-first: every base rule below describes the phone layout. Larger
+   viewports are enhanced with min-width queries only.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. FONTS
+   Self-hosted woff2 only — no Google Fonts request. Four weights, because
+   four is all the page paints. Add a weight here only when a design needs it.
+   ========================================================================== */
+
+/* poppins-regular - body copy */
+@font-face {
+  font-display: swap;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/poppins-v24-latin-regular.woff2') format('woff2');
+}
+
+/* poppins-500 - tagline, dropdown links */
+@font-face {
+  font-display: swap;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  src: url('../fonts/poppins-v24-latin-500.woff2') format('woff2');
+}
+
+/* poppins-600 - navigation, buttons */
+@font-face {
+  font-display: swap;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  src: url('../fonts/poppins-v24-latin-600.woff2') format('woff2');
+}
+
+/* poppins-800 - display headings */
+@font-face {
+  font-display: swap;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  src: url('../fonts/poppins-v24-latin-800.woff2') format('woff2');
+}
+
+
+/* ==========================================================================
+   2. DESIGN TOKENS
+   Black / white / pink. The purple in the reference screenshot is rendered
+   here as a pink glow over black rather than a fourth brand colour.
+   ========================================================================== */
+
+:root {
+  /* Brand */
+  --color-black:        #0B0B0D;
+  --color-black-deep:   #000000;
+  --color-surface:      #141216;   /* cards, raised panels */
+  --color-surface-alt:  #1D1A20;   /* dropdown, hovered rows */
+  --color-white:        #FFFFFF;
+  --color-pink:         #E82CD6;
+  --color-pink-light:   #F76BE7;
+  --color-pink-dark:    #B31FA4;
+
+  /* Text */
+  --color-text:         #FFFFFF;
+  --color-text-muted:   #B9B2BE;
+  --color-text-dark:    #0B0B0D;   /* on light/pink surfaces */
+
+  /* Lines & glows */
+  --color-border:       rgba(255, 255, 255, 0.14);
+  --color-border-pink:  rgba(232, 44, 214, 0.55);
+  --glow-pink:          0 0 40px rgba(232, 44, 214, 0.35);
+
+  /* Type */
+  --font-body: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  /* Spacing & layout */
+  --container-max: 75rem;   /* 1200px */
+  --gutter: 1.25rem;
+  --section-spacing: 4.5rem;
+  --header-height: 4.5rem;
+
+  /* Motion — one curve everywhere so the site feels like one object. */
+  --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-wipe: cubic-bezier(0.65, 0, 0.35, 1);
+  --speed-fast: 0.2s;
+  --speed: 0.35s;
+  --speed-slow: 0.5s;
+
+  --radius-pill: 999px;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+
+  --z-header: 100;
+  --z-scrim: 90;
+  --z-back-to-top: 80;
+}
+
+@media (min-width: 48em) {
+  :root {
+    --gutter: 2rem;
+    --section-spacing: 6rem;
+    --header-height: 5.25rem;
+  }
+}
+
+@media (min-width: 64em) {
+  :root {
+    --gutter: 2.5rem;
+    --section-spacing: 7.5rem;
+  }
+}
+
+
+/* ==========================================================================
+   3. RESET & BASE
+   ========================================================================== */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+* { margin: 0; padding: 0; }
+
+html {
+  /* Anchor links land below the sticky header instead of under it. */
+  scroll-padding-top: calc(var(--header-height) + 1rem);
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-black);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.65;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Set by global.js while the mobile menu is open. */
+body.has-menu-open { overflow: hidden; }
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+img { height: auto; }
+
+svg { fill: none; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+ul { list-style: none; }
+
+h1, h2, h3, h4 {
+  font-weight: 800;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+p { text-wrap: pretty; }
+
+
+/* ==========================================================================
+   4. ACCESSIBILITY HELPERS
+   ========================================================================== */
+
+/* Every interactive element gets the same visible focus ring. */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-pink-light);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -150%);
+  z-index: 200;
+  background-color: var(--color-pink);
+  color: var(--color-white);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  transition: transform var(--speed) var(--ease-out);
+}
+
+.skip-link:focus-visible { transform: translate(-50%, 0); }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+
+/* ==========================================================================
+   5. LAYOUT UTILITIES
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+
+/* ==========================================================================
+   6. BUTTONS
+   The hover fill wipes in from the left instead of cross-fading: a ::before
+   layer scales on the X axis from a left-hand origin. Transforms are composited,
+   so the wipe stays smooth without repainting the button.
+   ========================================================================== */
+
+.btn {
+  position: relative;
+  isolation: isolate;          /* keeps the ::before layer behind the label only */
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.25rem;
+  padding: 0.875rem 2rem;
+  border: 2px solid transparent;
+  border-radius: var(--radius-pill);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-align: center;
+  /* A two-word label must never break mid-button; if the pair no longer fits
+     side by side, the row wraps instead. */
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--speed) var(--ease-wipe),
+              border-color var(--speed) var(--ease-wipe),
+              transform var(--speed-fast) var(--ease-out),
+              box-shadow var(--speed) var(--ease-out);
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--speed-slow) var(--ease-wipe);
+}
+
+.btn:hover::before,
+.btn:focus-visible::before { transform: scaleX(1); }
+
+.btn__label {
+  position: relative;
+  z-index: 1;
+}
+
+.btn:active { transform: translateY(1px); }
+
+/* Primary — solid pink, wipes to white. */
+.btn--primary {
+  background-color: var(--color-pink);
+  border-color: var(--color-pink);
+  color: var(--color-white);
+}
+
+.btn--primary::before { background-color: var(--color-white); }
+
+.btn--primary:hover,
+.btn--primary:focus-visible {
+  border-color: var(--color-white);
+  color: var(--color-text-dark);
+  box-shadow: var(--glow-pink);
+}
+
+/* Secondary — outlined white, wipes to pink. */
+.btn--secondary {
+  background-color: transparent;
+  border-color: var(--color-white);
+  color: var(--color-white);
+}
+
+.btn--secondary::before { background-color: var(--color-pink); }
+
+.btn--secondary:hover,
+.btn--secondary:focus-visible {
+  border-color: var(--color-pink);
+  color: var(--color-white);
+  box-shadow: var(--glow-pink);
+}
+
+
+/* ==========================================================================
+   7. SITE HEADER / NAVIGATION
+   Transparent over the hero; global.js adds .is-scrolled to fade in a blurred
+   backdrop once the page moves.
+   ========================================================================== */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-header);
+  background-color: transparent;
+}
+
+/* The tint and blur live on a pseudo-element, NOT on .site-header itself.
+   backdrop-filter makes its element the containing block for position:fixed
+   descendants, which would trap the mobile drawer inside the header's 72px
+   box instead of letting it span the viewport. A pseudo-element has no
+   element descendants, so the drawer stays anchored to the viewport.
+
+   A light tint at rest keeps the bar separated from the hero; it deepens on
+   scroll rather than appearing from nothing. */
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: rgba(11, 11, 13, 0.28);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  pointer-events: none;
+  transition: background-color var(--speed) var(--ease-out);
+}
+
+.site-header.is-scrolled::before { background-color: rgba(11, 11, 13, 0.86); }
+
+/* The separator is a pseudo-element, not a border, so it can fade out toward
+   both edges instead of ending in hard corners. */
+.site-header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+              transparent,
+              rgba(255, 255, 255, 0.28) 20%,
+              var(--color-border-pink) 50%,
+              rgba(255, 255, 255, 0.28) 80%,
+              transparent);
+  opacity: 0.85;
+  transition: opacity var(--speed) var(--ease-out);
+}
+
+.site-header.is-scrolled::after { opacity: 1; }
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  max-width: var(--container-max);
+  min-height: var(--header-height);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* --- Logo --- */
+
+.site-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  flex-shrink: 0;
+  font-size: 1.125rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.site-logo__mark {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  color: var(--color-pink);
+  transition: transform var(--speed) var(--ease-out);
+}
+
+.site-logo:hover .site-logo__mark { transform: rotate(-8deg) scale(1.06); }
+
+.site-logo__text em {
+  color: var(--color-pink);
+  font-style: italic;
+}
+
+/* --- Hamburger --- */
+
+.nav-toggle {
+  position: relative;
+  z-index: 2;              /* above the drawer, which it has to stay tappable over */
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-right: -0.5rem;
+  flex-shrink: 0;
+}
+
+/* Three bars drawn from one element: the middle is the box, the outer two are
+   pseudo-elements that rotate into an X when the menu opens. */
+.nav-toggle__bars,
+.nav-toggle__bars::before,
+.nav-toggle__bars::after {
+  content: '';
+  display: block;
+  width: 1.5rem;
+  height: 2px;
+  background-color: var(--color-white);
+  border-radius: 2px;
+  transition: transform var(--speed) var(--ease-out),
+              opacity var(--speed-fast) linear;
+}
+
+.nav-toggle__bars { position: relative; }
+
+.nav-toggle__bars::before { position: absolute; top: -7px; left: 0; }
+.nav-toggle__bars::after  { position: absolute; top: 7px;  left: 0; }
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars { background-color: transparent; }
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars::before { transform: translateY(7px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars::after  { transform: translateY(-7px) rotate(-45deg); }
+
+/* --- Mobile drawer ---
+   Slides in from the right. Kept in the DOM (not display:none) so the slide
+   transition can run and focus order stays intact. */
+
+.primary-nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;              /* local to the header's stacking context */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: min(20rem, 82vw);
+  padding: calc(var(--header-height) + 1.5rem) 1.75rem 2rem;
+  background-color: var(--color-black);
+  border-left: 1px solid var(--color-border);
+  overflow-y: auto;
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform var(--speed) var(--ease-out),
+              visibility 0s linear var(--speed);
+}
+
+.primary-nav.is-open {
+  transform: translateX(0);
+  visibility: visible;
+  transition: transform var(--speed) var(--ease-out),
+              visibility 0s linear 0s;
+}
+
+.primary-nav__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.primary-nav__item { border-bottom: 1px solid var(--color-border); }
+
+.primary-nav__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.9375rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-white);
+  text-align: left;
+  transition: color var(--speed-fast) var(--ease-out);
+}
+
+.primary-nav__link:hover { color: var(--color-pink); }
+
+.primary-nav__chevron {
+  display: grid;
+  place-items: center;
+  width: 0.75rem;
+  flex-shrink: 0;
+  transition: transform var(--speed) var(--ease-out);
+}
+
+.primary-nav__toggle[aria-expanded="true"] .primary-nav__chevron { transform: rotate(180deg); }
+
+/* --- Dropdown (mobile: accordion) ---
+   grid-template-rows 0fr → 1fr animates to the content's natural height, which
+   max-height guesswork can't do cleanly. */
+
+.dropdown {
+  display: grid;
+  grid-template-rows: 0fr;
+  /* visibility, not just zero height: a collapsed row still holds its links in
+     the tab order otherwise. Flipped only after the collapse finishes, so the
+     animation itself stays on screen. */
+  visibility: hidden;
+  transition: grid-template-rows var(--speed) var(--ease-out),
+              visibility 0s linear var(--speed);
+}
+
+.dropdown__list { overflow: hidden; }
+
+.primary-nav__toggle[aria-expanded="true"] + .dropdown {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows var(--speed) var(--ease-out),
+              visibility 0s linear 0s;
+}
+
+.dropdown__link {
+  display: block;
+  padding: 0.625rem 0 0.625rem 1rem;
+  border-left: 2px solid var(--color-border-pink);
+  margin-bottom: 0.25rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  transition: color var(--speed-fast) var(--ease-out),
+              border-color var(--speed-fast) var(--ease-out);
+}
+
+.dropdown__list > li:first-child .dropdown__link { margin-top: 0.25rem; }
+
+.dropdown__link:hover {
+  color: var(--color-pink);
+  border-left-color: var(--color-pink);
+}
+
+/* --- Social icons --- */
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: auto;
+}
+
+.social-links__link {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  color: var(--color-white);
+  transition: color var(--speed-fast) var(--ease-out),
+              background-color var(--speed-fast) var(--ease-out),
+              transform var(--speed-fast) var(--ease-out);
+}
+
+.social-links__link svg { width: 1.25rem; height: 1.25rem; }
+
+.social-links__link:hover {
+  background-color: var(--color-pink);
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+
+/* --- Scrim behind the open drawer --- */
+
+.nav-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-scrim);
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transition: opacity var(--speed) var(--ease-out);
+}
+
+.nav-scrim.is-visible { opacity: 1; }
+
+
+/* ==========================================================================
+   8. NAVIGATION — 64em and up
+   The drawer unwinds into a horizontal bar and the accordion becomes a
+   hover-and-focus dropdown panel.
+   ========================================================================== */
+
+@media (min-width: 64em) {
+
+  .nav-toggle,
+  .nav-scrim { display: none; }
+
+  .primary-nav {
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2rem;
+    width: auto;
+    padding: 0;
+    background-color: transparent;
+    border-left: 0;
+    overflow: visible;
+    transform: none;
+    visibility: visible;
+    transition: none;
+  }
+
+  .primary-nav__list {
+    flex-direction: row;
+    align-items: center;
+    gap: 1.75rem;
+  }
+
+  .primary-nav__item {
+    position: relative;
+    border-bottom: 0;
+  }
+
+  .primary-nav__link {
+    position: relative;    /* the ::after underline anchors here, not on the li */
+    width: auto;
+    padding: 0.5rem 0;
+    font-size: 0.9375rem;
+  }
+
+  /* Pink underline that grows from the left, matching the button wipe. */
+  .primary-nav__link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-pink);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform var(--speed) var(--ease-wipe);
+  }
+
+  .primary-nav__item:hover > .primary-nav__link::after,
+  .primary-nav__link:focus-visible::after { transform: scaleX(1); }
+
+  .primary-nav__chevron { width: 0.625rem; }
+
+  /* --- Dropdown panel --- */
+
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    display: block;                 /* drop the mobile grid accordion */
+    width: max-content;
+    min-width: 14rem;
+    margin-top: 0.75rem;
+    padding: 0.5rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+
+    /* Fade + lift in. visibility is delayed on the way out so the panel is
+       still hoverable while it animates, then goes untabbable once hidden. */
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -0.5rem);
+    transition: opacity var(--speed) var(--ease-out),
+                transform var(--speed) var(--ease-out),
+                visibility 0s linear var(--speed);
+  }
+
+  /* An invisible bridge across the 0.75rem gap, so moving the pointer from
+     "Services" down into the panel doesn't close it mid-travel. */
+  .dropdown::before {
+    content: '';
+    position: absolute;
+    top: -0.75rem;
+    left: 0;
+    right: 0;
+    height: 0.75rem;
+  }
+
+  .has-dropdown:hover > .dropdown,
+  .has-dropdown:focus-within > .dropdown,
+  .primary-nav__toggle[aria-expanded="true"] + .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+    transition: opacity var(--speed) var(--ease-out),
+                transform var(--speed) var(--ease-out),
+                visibility 0s linear 0s;
+  }
+
+  .has-dropdown:hover > .primary-nav__toggle .primary-nav__chevron,
+  .has-dropdown:focus-within > .primary-nav__toggle .primary-nav__chevron {
+    transform: rotate(180deg);
+  }
+
+  .dropdown__list { overflow: visible; }
+
+  .dropdown__link,
+  .dropdown__list > li:first-child .dropdown__link {
+    margin: 0;
+    padding: 0.625rem 0.875rem;
+    border-left: 0;
+    border-radius: 0.5rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    transition: color var(--speed-fast) var(--ease-out),
+                background-color var(--speed-fast) var(--ease-out),
+                padding-left var(--speed-fast) var(--ease-out);
+  }
+
+  .dropdown__link:hover {
+    background-color: var(--color-surface-alt);
+    color: var(--color-white);
+    padding-left: 1.125rem;
+  }
+
+  .social-links {
+    margin-top: 0;
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--color-border);
+  }
+
+  .social-links__link {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .social-links__link svg { width: 1.125rem; height: 1.125rem; }
+}
+
+
+/* ==========================================================================
+   9. BACK TO TOP
+   Hidden until global.js adds .is-visible past the first viewport.
+   ========================================================================== */
+
+.back-to-top {
+  position: fixed;
+  right: var(--gutter);
+  bottom: var(--gutter);
+  z-index: var(--z-back-to-top);
+  display: grid;
+  place-items: center;
+  width: 2.875rem;
+  height: 2.875rem;
+  background-color: var(--color-pink);
+  border-radius: 50%;
+  color: var(--color-white);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), var(--glow-pink);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(1rem) scale(0.9);
+  transition: opacity var(--speed) var(--ease-out),
+              transform var(--speed) var(--ease-out),
+              background-color var(--speed-fast) var(--ease-out),
+              visibility 0s linear var(--speed);
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  transition: opacity var(--speed) var(--ease-out),
+              transform var(--speed) var(--ease-out),
+              background-color var(--speed-fast) var(--ease-out),
+              visibility 0s linear 0s;
+}
+
+.back-to-top:hover {
+  background-color: var(--color-white);
+  color: var(--color-text-dark);
+  transform: translateY(-3px) scale(1.04);
+}
+
+.back-to-top svg { width: 1.25rem; height: 1.25rem; }
+
+@media (min-width: 48em) {
+  .back-to-top {
+    width: 3.25rem;
+    height: 3.25rem;
+  }
+}
+
+
+/* ==========================================================================
+   10. REDUCED MOTION
+   Honour the OS setting: keep the state changes, drop the travel.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* The wipe would flash at 0.01ms, so show the fill outright instead. */
+  .btn::before { transform: scaleX(1); opacity: 0; }
+  .btn:hover::before,
+  .btn:focus-visible::before { opacity: 1; }
+}
+
+
+/* ==========================================================================
+   11. SECTIONS
+   The eyebrow + title + intro block is shared by services, gallery, about,
+   policies, and FAQ, so it lives here rather than in a page stylesheet.
+   ========================================================================== */
+
+.section { padding-block: var(--section-spacing); }
+
+.section-head {
+  display: grid;
+  gap: 1.75rem;
+  margin-bottom: 3rem;
+}
+
+.section-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.875rem;
+  /* Follows the section's theme token, so it inverts on .section--light
+     instead of going white-on-white. */
+  color: var(--color-text);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.section-eyebrow__mark {
+  display: grid;
+  place-items: center;
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  color: var(--color-pink);
+}
+
+.section-eyebrow__mark svg { width: 100%; height: 100%; }
+
+.section-title {
+  font-size: clamp(2rem, 7vw, 3.25rem);
+  letter-spacing: -0.02em;
+}
+
+.section-title__accent { color: var(--color-pink); }
+
+.section-intro {
+  max-width: 46ch;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.section-head__aside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+@media (min-width: 64em) {
+
+  .section-head {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: end;
+    gap: 3rem;
+    margin-bottom: 4rem;
+  }
+
+  .section-title { font-size: clamp(2.75rem, 4.2vw, 3.5rem); }
+}
+
+
+/* ==========================================================================
+   12. LIGHT SECTION
+   Rather than overriding each component on a white background, this redefines
+   the theme tokens on the section itself. Buttons, cards, borders and type all
+   read the same variable names and invert on their own.
+   ========================================================================== */
+
+.section--light {
+  --color-text: var(--color-text-dark);
+  --color-text-muted: #5C5563;
+  --color-surface: #F5F2F6;
+  --color-surface-alt: #EBE6EE;
+  --color-border: rgba(11, 11, 13, 0.12);
+  --glow-pink: 0 0 32px rgba(232, 44, 214, 0.22);
+
+  position: relative;
+  background-color: var(--color-white);
+  color: var(--color-text);
+  /* Room for the wave dividers, which overlap the section's own edges. */
+  padding-block: calc(var(--section-spacing) + 2rem);
+}
+
+/* The outlined button is white-on-dark by default; on white it needs ink. */
+.section--light .btn--secondary {
+  border-color: var(--color-text-dark);
+  color: var(--color-text-dark);
+}
+
+.section--light .btn--secondary:hover,
+.section--light .btn--secondary:focus-visible {
+  border-color: var(--color-pink);
+  color: var(--color-white);
+}
+
+
+/* ==========================================================================
+   13. SECTION DIVIDER
+   The wave from images/svgs/dividers, inlined so `fill="currentColor"` can
+   pick up whichever section colour it needs to blend into.
+   ========================================================================== */
+
+.section-divider {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: block;
+  height: clamp(2.5rem, 6vw, 5.5rem);
+  color: var(--color-black);   /* matches the dark sections above and below */
+  pointer-events: none;
+  line-height: 0;
+}
+
+.section-divider svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.section-divider--top { top: 0; }
+
+/* Same shape flipped, so the wave crests upward into the dark section below. */
+.section-divider--bottom {
+  bottom: 0;
+  transform: rotate(180deg);
+}
