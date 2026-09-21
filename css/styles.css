@@ -7,10 +7,11 @@
 
    Sections:
      1. Hero
-     2. Hearts (hero decoration)
+     2. Hearts (per-section placement)
      3. Marquee
      4. Services
      5. About
+     6. Gallery
    ========================================================================== */
 
 
@@ -255,40 +256,13 @@
 
 
 /* ==========================================================================
-   2. HEARTS — hero decoration
-   One SVG used as a CSS mask, so a single cached file paints every heart and
-   the colour comes from background-color. Sits above the hero glow but below
-   the copy, which owns z-index 1.
+   2. HEARTS — per-section placement
+   The .hearts / .heart component itself lives in global.css; these rules only
+   say where each heart sits and how it drifts. Staggered durations and
+   negative delays mean no two ever rise together.
    ========================================================================== */
 
-.hero__hearts {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.hero__heart {
-  position: absolute;
-  display: block;
-  /* The SVG's viewBox is cropped to the path, so width maps to the drawn
-     heart and this ratio keeps it undistorted. */
-  aspect-ratio: 266 / 234;
-  background-color: var(--color-pink);
-  -webkit-mask: url('../images/svgs/heart.svg') center / contain no-repeat;
-          mask: url('../images/svgs/heart.svg') center / contain no-repeat;
-  animation: heart-float var(--float-time, 6s) ease-in-out var(--float-delay, 0s) infinite;
-}
-
-/* Rotation lives in the keyframes because transform is a single property —
-   setting it separately elsewhere would overwrite the float. */
-@keyframes heart-float {
-  0%, 100% { transform: translateY(0)      rotate(var(--tilt, 0deg)); }
-  50%      { transform: translateY(-0.9rem) rotate(var(--tilt, 0deg)); }
-}
-
-/* Staggered times and delays so no two hearts ever rise together. */
-.hero__heart--1 {
+.hearts--hero .heart--1 {
   top: 15%;
   left: 2%;
   width: 2.75rem;
@@ -298,7 +272,7 @@
   --float-delay: 0s;
 }
 
-.hero__heart--2 {
+.hearts--hero .heart--2 {
   top: 6%;
   right: 12%;
   width: 1.5rem;
@@ -308,7 +282,7 @@
   --float-delay: -1.8s;
 }
 
-.hero__heart--3 {
+.hearts--hero .heart--3 {
   bottom: 14%;
   left: 7%;
   width: 1.75rem;
@@ -318,7 +292,7 @@
   --float-delay: -3.1s;
 }
 
-.hero__heart--4 {
+.hearts--hero .heart--4 {
   top: 47%;
   right: 3%;
   width: 2.25rem;
@@ -328,7 +302,7 @@
   --float-delay: -0.7s;
 }
 
-.hero__heart--5 {
+.hearts--hero .heart--5 {
   bottom: 6%;
   right: 34%;
   width: 1.25rem;
@@ -338,7 +312,7 @@
   --float-delay: -4.2s;
 }
 
-.hero__heart--6 {
+.hearts--hero .heart--6 {
   top: 30%;
   left: 46%;
   width: 1.125rem;
@@ -349,18 +323,14 @@
 }
 
 /* Phones only have room for a few before it reads as clutter. */
-.hero__heart--2,
-.hero__heart--4,
-.hero__heart--6 { display: none; }
+.hearts--hero .heart--2,
+.hearts--hero .heart--4,
+.hearts--hero .heart--6 { display: none; }
 
 @media (min-width: 48em) {
-  .hero__heart--2,
-  .hero__heart--4,
-  .hero__heart--6 { display: block; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero__heart { animation: none; }
+  .hearts--hero .heart--2,
+  .hearts--hero .heart--4,
+  .hearts--hero .heart--6 { display: block; }
 }
 
 
@@ -441,10 +411,46 @@
    4. SERVICES
    ========================================================================== */
 
+.services {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Particle field. Its own layer so the opacity can be dialled down without
+   touching the SVG, and so it never intercepts pointer events. */
+.services__particles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  background: url('../images/svgs/wobbling-particles.svg') center / cover no-repeat;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.services .container { position: relative; z-index: 1; }
+
+/* --- Scroller ---
+   On phones the card row is a swipeable, snap-to-card carousel. It bleeds to
+   both screen edges so a half-visible next card hints that there is more. */
+.services__viewport {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  margin-inline: calc(var(--gutter) * -1);
+  padding-inline: var(--gutter);
+  scroll-padding-inline: var(--gutter);
+}
+
 .services__grid {
   display: grid;
-  gap: 1.5rem;
+  grid-auto-flow: column;
+  grid-auto-columns: 80%;
+  gap: 1rem;
 }
+
+.service-card { scroll-snap-align: start; }
+
+.services__nav { margin-top: 1.75rem; }
 
 .service-card {
   display: flex;
@@ -580,7 +586,23 @@
 }
 
 @media (min-width: 48em) {
-  .services__grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Carousel off: no scroller, no snap, no arrows. */
+  .services__viewport {
+    overflow: visible;
+    scroll-snap-type: none;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+
+  .services__nav { display: none; }
+
+  .services__grid {
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
 }
 
 @media (min-width: 80em) {
@@ -857,4 +879,181 @@
     grid-template-columns: repeat(3, 1fr);
     margin-top: 4rem;
   }
+}
+
+
+/* ==========================================================================
+   6. GALLERY
+   ========================================================================== */
+
+.gallery {
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 2rem;
+}
+
+.gallery__intro { padding-inline: var(--gutter); }
+
+.gallery__title {
+  margin-bottom: 1.25rem;
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+}
+
+.gallery__title .section-title__accent { text-shadow: 0 0 34px rgba(232, 44, 214, 0.4); }
+
+.gallery__intro .section-intro { margin-bottom: 1.75rem; }
+
+/* --- Filmstrip --- */
+
+.gallery__viewport {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-inline: var(--gutter);
+  scroll-padding-inline: var(--gutter);
+}
+
+.gallery__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 78%;
+  gap: 0.875rem;
+}
+
+.gallery__figure {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  border: 1px solid var(--color-border-pink);
+  border-radius: var(--radius-lg);
+  scroll-snap-align: start;
+}
+
+.gallery__figure img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  transition: transform var(--speed-slow) var(--ease-out);
+}
+
+.gallery__figure:hover img { transform: scale(1.04); }
+
+/* Oversized index, sitting in a gradient so it stays readable over any photo. */
+.gallery__num {
+  position: absolute;
+  left: 1rem;
+  bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.16);
+  font-size: clamp(2.75rem, 9vw, 4rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  pointer-events: none;
+}
+
+.gallery__figure::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 45%;
+  background: linear-gradient(to top, rgba(11, 11, 13, 0.75), transparent);
+  pointer-events: none;
+}
+
+.gallery__num { z-index: 1; }
+
+/* --- Hearts --- */
+
+.hearts--gallery .heart--1 {
+  top: 8%;
+  right: 6%;
+  width: 2.5rem;
+  opacity: 0.3;
+  --tilt: -16deg;
+  --float-time: 7s;
+  --float-delay: 0s;
+}
+
+.hearts--gallery .heart--2 {
+  top: 38%;
+  left: 3%;
+  width: 1.5rem;
+  opacity: 0.26;
+  --tilt: 20deg;
+  --float-time: 5.6s;
+  --float-delay: -2.4s;
+}
+
+.hearts--gallery .heart--3 {
+  bottom: 10%;
+  left: 24%;
+  width: 1.875rem;
+  opacity: 0.22;
+  --tilt: -8deg;
+  --float-time: 8.2s;
+  --float-delay: -4.6s;
+}
+
+.hearts--gallery .heart--4 {
+  top: 18%;
+  left: 38%;
+  width: 1.125rem;
+  opacity: 0.24;
+  --tilt: 28deg;
+  --float-time: 6.2s;
+  --float-delay: -1.2s;
+}
+
+.hearts--gallery .heart--5 {
+  bottom: 24%;
+  right: 30%;
+  width: 1.375rem;
+  opacity: 0.2;
+  --tilt: -24deg;
+  --float-time: 7.8s;
+  --float-delay: -3.5s;
+}
+
+
+/* ==========================================================================
+   GALLERY — 48em and up
+   ========================================================================== */
+
+@media (min-width: 48em) {
+  .gallery__track { grid-auto-columns: 20rem; gap: 1rem; }
+}
+
+
+/* ==========================================================================
+   GALLERY — 64em and up
+   Intro column aligns to the container's left edge while the filmstrip runs
+   off the right of the screen, so the row reads as continuing.
+   ========================================================================== */
+
+@media (min-width: 64em) {
+
+  .gallery__inner {
+    grid-template-columns: minmax(17rem, 21rem) 1fr;
+    align-items: center;
+    gap: 3.5rem;
+    padding-left: max(var(--gutter), calc((100vw - var(--container-max)) / 2));
+  }
+
+  .gallery__intro { padding-inline: 0; }
+
+  .gallery__title { font-size: clamp(3rem, 5vw, 4.25rem); }
+
+  .gallery__viewport { padding-inline: 0; scroll-padding-inline: 0; }
+
+  .gallery__track { grid-auto-columns: 24rem; gap: 1.25rem; }
 }

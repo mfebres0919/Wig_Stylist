@@ -509,7 +509,8 @@ p { text-wrap: pretty; }
   transition: color var(--speed-fast) var(--ease-out);
 }
 
-.primary-nav__link:hover { color: var(--color-pink); }
+.primary-nav__link:hover,
+.primary-nav__link.is-active { color: var(--color-pink); }
 
 .primary-nav__chevron {
   display: grid;
@@ -667,7 +668,8 @@ p { text-wrap: pretty; }
   }
 
   .primary-nav__item:hover > .primary-nav__link::after,
-  .primary-nav__link:focus-visible::after { transform: scaleX(1); }
+  .primary-nav__link:focus-visible::after,
+  .primary-nav__link.is-active::after { transform: scaleX(1); }
 
   .primary-nav__chevron { width: 0.625rem; }
 
@@ -976,3 +978,116 @@ p { text-wrap: pretty; }
   bottom: 0;
   transform: rotate(180deg);
 }
+
+
+/* ==========================================================================
+   14. HEARTS
+   One SVG used as a CSS mask, so a single cached file paints every heart and
+   the colour comes from background-color. Sections position their own hearts
+   via .hearts--<section> .heart--<n> in the page stylesheet.
+
+   NOTE: Chrome refuses to load a CSS-referenced SVG on a file:// page, so
+   these are invisible when index.html is opened directly. Serve over HTTP.
+   ========================================================================== */
+
+.hearts {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.heart {
+  position: absolute;
+  display: block;
+  /* heart.svg's viewBox is cropped to the path, so width maps to the drawn
+     heart and this ratio keeps it undistorted. */
+  aspect-ratio: 266 / 234;
+  background-color: var(--color-pink);
+  -webkit-mask: url('../images/svgs/heart.svg') center / contain no-repeat;
+          mask: url('../images/svgs/heart.svg') center / contain no-repeat;
+  animation: heart-float var(--float-time, 6s) ease-in-out var(--float-delay, 0s) infinite;
+}
+
+/* Rotation belongs in the keyframes: transform is a single property, so
+   setting the tilt separately would overwrite the float. */
+@keyframes heart-float {
+  0%, 100% { transform: translateY(0)       rotate(var(--tilt, 0deg)); }
+  50%      { transform: translateY(-0.9rem) rotate(var(--tilt, 0deg)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heart { animation: none; }
+}
+
+
+/* ==========================================================================
+   15. CAROUSEL
+   Shared chrome for the services row and the gallery. The scrolling itself is
+   native overflow + scroll-snap, so swipe, trackpad and keyboard all work
+   without JavaScript; global.js only drives the arrows and the counter.
+   ========================================================================== */
+
+.carousel__nav {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.carousel__btn {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  background-color: transparent;
+  border: 1px solid var(--color-border-pink);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  transition: background-color var(--speed-fast) var(--ease-out),
+              border-color var(--speed-fast) var(--ease-out),
+              color var(--speed-fast) var(--ease-out),
+              opacity var(--speed-fast) var(--ease-out),
+              transform var(--speed-fast) var(--ease-out);
+}
+
+.carousel__btn svg { width: 1.125rem; height: 1.125rem; }
+
+.carousel__btn:hover:not(:disabled) {
+  background-color: var(--color-pink);
+  border-color: var(--color-pink);
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+
+.carousel__btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.carousel__counter {
+  margin-bottom: 1.25rem;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.carousel__counter-current {
+  color: var(--color-pink);
+  font-size: 1.125rem;
+}
+
+.carousel__counter-sep { margin-inline: 0.25rem; }
+
+/* Shared scroller behaviour. The scrollbar is hidden because the arrows and
+   the snap points already communicate that there is more to see. */
+.services__viewport,
+.gallery__viewport {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior-x: contain;
+}
+
+.services__viewport::-webkit-scrollbar,
+.gallery__viewport::-webkit-scrollbar { display: none; }

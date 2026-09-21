@@ -245,4 +245,135 @@
     desktopQuery.addListener(handleBreakpointChange);
   }
 
+
+  /* ========================================================================
+     8. CAROUSELS
+     The scrolling itself is native overflow + CSS scroll-snap, so swipe,
+     trackpad, and keyboard already work with JS off. This only wires up the
+     arrows and the photo counter, and keeps them in sync with whatever the
+     user does to the scroller directly.
+     ======================================================================== */
+
+  function initCarousel(root) {
+    var viewport = root.querySelector('[data-carousel-viewport]');
+    if (!viewport) return;
+
+    var prev    = root.querySelector('[data-carousel-prev]');
+    var next    = root.querySelector('[data-carousel-next]');
+    var current = root.querySelector('[data-carousel-current]');
+    var total   = root.querySelector('[data-carousel-total]');
+
+    var track = viewport.firstElementChild;
+    var items = track ? Array.prototype.slice.call(track.children) : [];
+    if (!items.length) return;
+
+    function pad(n) { return n < 10 ? '0' + n : String(n); }
+    if (total) total.textContent = pad(items.length);
+
+    /* Measured rather than assumed: card width changes with the breakpoint,
+       and the gap is whatever the stylesheet says it is. */
+    function step() {
+      if (items.length < 2) return items[0].getBoundingClientRect().width;
+      return items[1].getBoundingClientRect().left - items[0].getBoundingClientRect().left;
+    }
+
+    function index() {
+      var w = step();
+      return w > 0 ? Math.round(viewport.scrollLeft / w) : 0;
+    }
+
+    function sync() {
+      var i = index();
+      /* A sub-pixel gap can leave scrollLeft a hair under the true maximum,
+         so treat "within 2px of the end" as the end. */
+      var atStart = viewport.scrollLeft <= 2;
+      var atEnd   = viewport.scrollLeft >= viewport.scrollWidth - viewport.clientWidth - 2;
+
+      if (prev) prev.disabled = atStart;
+      if (next) next.disabled = atEnd;
+      if (current) current.textContent = pad(Math.min(i + 1, items.length));
+    }
+
+    function go(dir) {
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      viewport.scrollBy({ left: dir * step(), behavior: reduced ? 'auto' : 'smooth' });
+    }
+
+    if (prev) prev.addEventListener('click', function () { go(-1); });
+    if (next) next.addEventListener('click', function () { go(1); });
+
+    var ticking = false;
+    viewport.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () { sync(); ticking = false; });
+    }, { passive: true });
+
+    /* The services row stops being a scroller at 48em, so the arrow states
+       have to be recomputed when the layout changes. */
+    window.addEventListener('resize', sync);
+    sync();
+  }
+
+  Array.prototype.slice.call(document.querySelectorAll('[data-carousel]'))
+    .forEach(initCarousel);
+
+
+  /* ========================================================================
+     9. ACTIVE SECTION
+     Highlights the nav link for whichever section the reader is in.
+     IntersectionObserver rather than a scroll handler: the browser does the
+     hit-testing off the main thread.
+     ======================================================================== */
+
+  /* Includes the Services item, which is a <button> with no href because it
+     also toggles the submenu — it carries data-section instead. */
+  var navLinks = Array.prototype.slice.call(
+    document.querySelectorAll('.primary-nav__link[href^="#"], .primary-nav__link[data-section]')
+  );
+
+  if (navLinks.length && 'IntersectionObserver' in window) {
+
+    var linkFor = {};
+    var sections = [];
+
+    navLinks.forEach(function (link) {
+      var id = link.dataset.section ||
+               (link.getAttribute('href') || '').replace('#', '');
+      if (!id) return;
+      var section = document.getElementById(id);
+      if (!section) return;          /* sections not built yet */
+      linkFor[id] = link;
+      sections.push(section);
+    });
+
+    function setActive(id) {
+      navLinks.forEach(function (link) { link.classList.remove('is-active'); });
+      if (linkFor[id]) linkFor[id].classList.add('is-active');
+    }
+
+    var visible = {};
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        visible[entry.target.id] = entry.isIntersecting ? entry.intersectionRatio : 0;
+      });
+
+      /* Whichever tracked section currently covers the most of the band wins,
+         so short sections next to tall ones still get their turn. */
+      var bestId = null, bestRatio = 0;
+      Object.keys(visible).forEach(function (id) {
+        if (visible[id] > bestRatio) { bestRatio = visible[id]; bestId = id; }
+      });
+
+      if (bestId) setActive(bestId);
+    }, {
+      /* A band across the middle of the viewport, below the fixed header. */
+      rootMargin: '-45% 0px -45% 0px',
+      threshold: [0, 0.25, 0.5, 0.75, 1]
+    });
+
+    sections.forEach(function (section) { observer.observe(section); });
+  }
+
 })();
