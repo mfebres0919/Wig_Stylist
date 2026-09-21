@@ -70,8 +70,6 @@
         <ul class="primary-nav__list">
 
           <li class="primary-nav__item"><a class="primary-nav__link" href="#hero">Home</a></li>
-          <li class="primary-nav__item"><a class="primary-nav__link" href="#about">About</a></li>
-
           <!-- Services is a <button>, not a link, so the submenu is reachable by
                keyboard and tap. Desktop also opens it on hover via CSS. -->
           <li class="primary-nav__item has-dropdown" data-dropdown>
@@ -95,6 +93,8 @@
               </ul>
             </div>
           </li>
+          <li class="primary-nav__item"><a class="primary-nav__link" href="#about">About</a></li>
+
 
           <li class="primary-nav__item"><a class="primary-nav__link" href="#gallery">Gallery</a></li>
           <li class="primary-nav__item"><a class="primary-nav__link" href="#faq">FAQ</a></li>
@@ -142,13 +142,13 @@
 
       <!-- Decoration only. One SVG file, tinted pink through a CSS mask and
            reused at six sizes, so there is no per-heart asset. -->
-      <div class="hero__hearts" aria-hidden="true">
-        <span class="hero__heart hero__heart--1"></span>
-        <span class="hero__heart hero__heart--2"></span>
-        <span class="hero__heart hero__heart--3"></span>
-        <span class="hero__heart hero__heart--4"></span>
-        <span class="hero__heart hero__heart--5"></span>
-        <span class="hero__heart hero__heart--6"></span>
+      <div class="hearts hearts--hero" aria-hidden="true">
+        <span class="heart heart--1"></span>
+        <span class="heart heart--2"></span>
+        <span class="heart heart--3"></span>
+        <span class="heart heart--4"></span>
+        <span class="heart heart--5"></span>
+        <span class="heart heart--6"></span>
       </div>
 
       <div class="hero__inner">
@@ -255,7 +255,12 @@
     <!-- ==========================================================================
          SERVICES
          ========================================================================== -->
-    <section class="section services" id="services">
+    <section class="section services" id="services" data-carousel>
+
+      <!-- Animated particle field from images/svgs/wobbling-particles.svg,
+           held on its own layer so its opacity can be dialled down. -->
+      <span class="services__particles" aria-hidden="true"></span>
+
       <div class="container">
 
         <div class="section-head">
@@ -284,7 +289,10 @@
           </div>
         </div>
 
-        <ul class="services__grid">
+        <!-- Below 48em this scroller is a swipeable, snap-to-card carousel;
+             from 48em up the same markup lays out as a plain grid. -->
+        <div class="services__viewport" data-carousel-viewport>
+          <ul class="services__grid">
           <li class="service-card">
             <div class="service-card__media">
               <picture>
@@ -396,7 +404,23 @@
               </span>
             </a>
           </li>
-        </ul>
+          </ul>
+        </div>
+
+        <div class="carousel__nav services__nav">
+          <button class="carousel__btn" type="button" data-carousel-prev aria-label="Previous service">
+            <svg viewBox="0 0 24 24" fill="none" focusable="false" aria-hidden="true">
+              <path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="carousel__btn" type="button" data-carousel-next aria-label="Next service">
+            <svg viewBox="0 0 24 24" fill="none" focusable="false" aria-hidden="true">
+              <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
 
       </div>
     </section>
@@ -519,6 +543,165 @@
 
       <span class="section-divider section-divider--bottom" aria-hidden="true"><svg viewBox="0 0 1000 100" preserveAspectRatio="none" focusable="false"><path d="M1000 0H0v52C62.5 28 125 4 250 4c250 0 250 96 500 96 125 0 187.5-24 250-48V0Z" fill="currentColor"/></svg></span>
 
+    </section>
+
+
+    <!-- ==========================================================================
+         GALLERY
+         Same carousel behaviour as the services row, driven by the same
+         data-carousel hooks in global.js.
+         ========================================================================== -->
+    <section class="section gallery" id="gallery" data-carousel>
+
+      <div class="hearts hearts--gallery" aria-hidden="true">
+        <span class="heart heart--1"></span>
+        <span class="heart heart--2"></span>
+        <span class="heart heart--3"></span>
+        <span class="heart heart--4"></span>
+        <span class="heart heart--5"></span>
+      </div>
+
+      <div class="gallery__inner">
+
+        <div class="gallery__intro">
+          <p class="section-eyebrow">
+            <span class="section-eyebrow__mark" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                <path d="M6 2 3 14M13 2l-3 12" stroke="currentColor"
+                      stroke-width="1.9" stroke-linecap="round"/>
+              </svg>
+            </span>
+            Our Work
+          </p>
+
+          <h2 class="section-title gallery__title">
+            The<br><span class="section-title__accent">Gallery</span>
+          </h2>
+
+          <p class="section-intro">
+            Every install is a work of art. Browse the portfolio and see the
+            transformations for yourself &mdash; seamless lace, flawless
+            finishes, every time.
+          </p>
+
+          <p class="carousel__counter">
+            Photo <span class="carousel__counter-current" data-carousel-current>01</span>
+            <span class="carousel__counter-sep">/</span>
+            <span data-carousel-total>06</span>
+          </p>
+
+          <div class="carousel__nav">
+            <button class="carousel__btn" type="button" data-carousel-prev aria-label="Previous photo">
+              <svg viewBox="0 0 24 24" fill="none" focusable="false" aria-hidden="true">
+                <path d="M19 12H5m0 0 6-6m-6 6 6 6" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button class="carousel__btn" type="button" data-carousel-next aria-label="Next photo">
+              <svg viewBox="0 0 24 24" fill="none" focusable="false" aria-hidden="true">
+                <path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="gallery__viewport" data-carousel-viewport>
+          <ul class="gallery__track">
+            <li class="gallery__item">
+              <figure class="gallery__figure">
+                <picture>
+                  <source type="image/webp" media="(min-width: 48em)"
+                          srcset="images/gallery/gallery-01.webp" width="600" height="750">
+                  <source type="image/jpeg" media="(min-width: 48em)"
+                          srcset="images/gallery/gallery-01.jpg" width="600" height="750">
+                  <source type="image/webp"
+                          srcset="images/gallery/gallery-01-m.webp" width="400" height="500">
+                  <img src="images/gallery/gallery-01-m.jpg" width="400" height="500"
+                       alt="Reddish-brown body-wave unit with a seamless lace melt." loading="lazy" decoding="async">
+                </picture>
+                <span class="gallery__num" aria-hidden="true">01</span>
+              </figure>
+            </li>
+            <li class="gallery__item">
+              <figure class="gallery__figure">
+                <picture>
+                  <source type="image/webp" media="(min-width: 48em)"
+                          srcset="images/gallery/gallery-02.webp" width="600" height="750">
+                  <source type="image/jpeg" media="(min-width: 48em)"
+                          srcset="images/gallery/gallery-02.jpg" width="600" height="750">
+                  <source type="image/webp"
+                          srcset="images/gallery/gallery-02-m.webp" width="400" height="500">
+                  <img src="images/gallery/gallery-02-m.jpg" width="400" height="500"
+                       alt="Auburn wig styled with a deep side part and soft waves." loading="lazy" decoding="async">
+                </picture>
+                <span class="gallery__num" aria-hidden="true">02</span>
+              </figure>
+            </li>
+            <li class="gallery__item">
+              <figure class="gallery__figure">
+                <picture>
+                  <source type="image/webp" media="(min-width: 48em)"
+                          srcset="images/gallery/gallery-03.webp" width="600" height="750">
+                  <source type="image/jpeg" media="(min-width: 48em)"
+                          srcset="images/gallery/gallery-03.jpg" width="600" height="750">
+                  <source type="image/webp"
+                          srcset="images/gallery/gallery-03-m.webp" width="400" height="500">
+                  <img src="images/gallery/gallery-03-m.jpg" width="400" height="500"
+                       alt="Deep burgundy body-wave install under studio lighting." loading="lazy" decoding="async">
+                </picture>
+                <span class="gallery__num" aria-hidden="true">03</span>
+              </figure>
+            </li>
+            <li class="gallery__item">
+              <figure class="gallery__figure">
+                <picture>
+                  <source type="image/webp" media="(min-width: 48em)"
+                          srcset="images/gallery/gallery-04.webp" width="600" height="750">
+                  <source type="image/jpeg" media="(min-width: 48em)"
+                          srcset="images/gallery/gallery-04.jpg" width="600" height="750">
+                  <source type="image/webp"
+                          srcset="images/gallery/gallery-04-m.webp" width="400" height="500">
+                  <img src="images/gallery/gallery-04-m.jpg" width="400" height="500"
+                       alt="Warm copper-brown unit with a natural, plucked hairline." loading="lazy" decoding="async">
+                </picture>
+                <span class="gallery__num" aria-hidden="true">04</span>
+              </figure>
+            </li>
+            <li class="gallery__item">
+              <figure class="gallery__figure">
+                <picture>
+                  <source type="image/webp" media="(min-width: 48em)"
+                          srcset="images/gallery/gallery-05.webp" width="600" height="750">
+                  <source type="image/jpeg" media="(min-width: 48em)"
+                          srcset="images/gallery/gallery-05.jpg" width="600" height="750">
+                  <source type="image/webp"
+                          srcset="images/gallery/gallery-05-m.webp" width="400" height="500">
+                  <img src="images/gallery/gallery-05-m.jpg" width="400" height="500"
+                       alt="Chestnut body-wave wig styled in loose barrel curls." loading="lazy" decoding="async">
+                </picture>
+                <span class="gallery__num" aria-hidden="true">05</span>
+              </figure>
+            </li>
+            <li class="gallery__item">
+              <figure class="gallery__figure">
+                <picture>
+                  <source type="image/webp" media="(min-width: 48em)"
+                          srcset="images/gallery/gallery-06.webp" width="600" height="750">
+                  <source type="image/jpeg" media="(min-width: 48em)"
+                          srcset="images/gallery/gallery-06.jpg" width="600" height="750">
+                  <source type="image/webp"
+                          srcset="images/gallery/gallery-06-m.webp" width="400" height="500">
+                  <img src="images/gallery/gallery-06-m.jpg" width="400" height="500"
+                       alt="Honey-blonde straight unit with a sleek middle part." loading="lazy" decoding="async">
+                </picture>
+                <span class="gallery__num" aria-hidden="true">06</span>
+              </figure>
+            </li>
+          </ul>
+        </div>
+
+      </div>
     </section>
 
   </main>
