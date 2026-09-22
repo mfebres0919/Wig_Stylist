@@ -313,6 +313,59 @@
        have to be recomputed when the layout changes. */
     window.addEventListener('resize', sync);
     sync();
+
+
+    /* ---- Autoplay (opt-in via data-carousel-autoplay="<ms>") ----
+       Advances one card at a time and wraps at the end. It yields to the
+       reader: any hover, focus, touch or manual scroll stops it. */
+
+    var delay = parseInt(root.dataset.carouselAutoplay, 10);
+    if (!delay) return;
+
+    /* Auto-moving content is exactly what this preference asks us not to do. */
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var timer = null;
+
+    function tick() {
+      var atEnd = viewport.scrollLeft >= viewport.scrollWidth - viewport.clientWidth - 2;
+      if (atEnd) {
+        viewport.scrollTo({ left: 0, behavior: 'smooth' });   /* wrap around */
+      } else {
+        go(1);
+      }
+    }
+
+    function play() {
+      if (timer) return;
+      timer = window.setInterval(tick, delay);
+    }
+
+    function pause() {
+      window.clearInterval(timer);
+      timer = null;
+    }
+
+    root.addEventListener('mouseenter', pause);
+    root.addEventListener('mouseleave', play);
+    root.addEventListener('focusin', pause);
+    root.addEventListener('focusout', play);
+    /* A finger on the scroller means the reader is driving. */
+    viewport.addEventListener('touchstart', pause, { passive: true });
+    viewport.addEventListener('touchend', play, { passive: true });
+
+    /* Don't keep advancing in a tab nobody is looking at. */
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) pause(); else play();
+    });
+
+    /* Pressing an arrow resets the clock, so the next auto-advance isn't
+       half a beat behind the reader. */
+    [prev, next].forEach(function (btn) {
+      if (btn) btn.addEventListener('click', function () { pause(); play(); });
+    });
+
+    play();
   }
 
   Array.prototype.slice.call(document.querySelectorAll('[data-carousel]'))

@@ -52,9 +52,18 @@
 
       <a class="site-logo" href="#hero">
         <span class="site-logo__mark" aria-hidden="true">
-          <svg viewBox="0 0 32 32" fill="none" focusable="false">
-            <path d="M16 2c5 4.5 8 9 8 14a8 8 0 0 1-16 0c0-5 3-9.5 8-14Z" fill="currentColor"/>
-            <path d="M16 9c2.4 2.4 3.8 4.6 3.8 7a3.8 3.8 0 0 1-7.6 0c0-2.4 1.4-4.6 3.8-7Z" fill="#0B0B0D"/>
+          <!-- Three strands of wavy hair inside a ring. All strokes use
+               currentColor, so the mark recolours with the logo rather than
+               baking in a background colour. -->
+          <svg viewBox="0 0 40 40" fill="none" focusable="false">
+            <circle class="site-logo__ring" cx="20" cy="20" r="18.4"
+                    stroke="currentColor" stroke-width="1.5"/>
+            <path d="M13.4 9c-4.2 4.4-4.2 7.6 0 12s4.2 7.6 0 12"
+                  stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/>
+            <path d="M20 7.6c-4.6 4.8-4.6 8.3 0 13.1s4.6 8.3 0 13.1"
+                  stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/>
+            <path d="M26.6 9c-4.2 4.4-4.2 7.6 0 12s4.2 7.6 0 12"
+                  stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/>
           </svg>
         </span>
         <span class="site-logo__text">Hair by <em>Jordan</em></span>
@@ -94,11 +103,12 @@
               </ul>
             </div>
           </li>
-          <li class="primary-nav__item"><a class="primary-nav__link" href="#about">About</a></li>
-
-
+          <li class="primary-nav__item"><a class="primary-nav__link" href="#policies">Policies</a></li>
           <li class="primary-nav__item"><a class="primary-nav__link" href="#gallery">Gallery</a></li>
+          <li class="primary-nav__item"><a class="primary-nav__link" href="#about">About</a></li>
           <li class="primary-nav__item"><a class="primary-nav__link" href="#faq">FAQ</a></li>
+
+
           <li class="primary-nav__item"><a class="primary-nav__link" href="#contact">Contact</a></li>
         </ul>
 
@@ -409,131 +419,107 @@
 
 
     <!-- ==========================================================================
-         ABOUT
-         The one light section on the page. Rather than overriding every colour,
-         it redefines the theme tokens on itself, so buttons, cards and type
-         invert automatically. The wave dividers carry the dark sections above
-         and below into it.
+         POLICIES
+         Same carousel plumbing as services and gallery, plus autoplay: it
+         advances one card every 5s and stops on hover, focus, manual input,
+         a hidden tab, or a reduced-motion preference.
          ========================================================================== -->
-    <section class="section section--light about" id="about">
-
-      <div class="hearts hearts--about" aria-hidden="true">
-        <span class="heart heart--1"></span>
-        <span class="heart heart--2"></span>
-        <span class="heart heart--3"></span>
-        <span class="heart heart--4"></span>
-      </div>
-
-      <span class="section-divider section-divider--top" aria-hidden="true"><svg viewBox="0 0 1000 100" preserveAspectRatio="none" focusable="false"><path d="M1000 0H0v52C62.5 28 125 4 250 4c250 0 250 96 500 96 125 0 187.5-24 250-48V0Z" fill="currentColor"/></svg></span>
+    <section class="section policies" id="policies" data-carousel data-carousel-autoplay="5000">
 
       <div class="container">
 
-        <div class="about__grid">
-
-          <div class="about__media">
-            <figure class="about__photo">
-              <picture>
-                <source type="image/webp" media="(min-width: 48em)"
-                        srcset="images/about/about-jordan.webp" width="640" height="800">
-                <source type="image/jpeg" media="(min-width: 48em)"
-                        srcset="images/about/about-jordan.jpg" width="640" height="800">
-                <source type="image/webp"
-                        srcset="images/about/about-jordan-m.webp" width="460" height="575">
-                <img src="images/about/about-jordan-m.jpg" width="460" height="575"
-                     alt="Jordan, wig stylist, wearing a reddish-brown body-wave unit she installed."
-                     loading="lazy" decoding="async">
-              </picture>
-            </figure>
-
-            <!-- Circular badge. The text rides an SVG path, so it curves for real
-                 instead of being a picture of curved text. -->
-            <div class="about__badge">
-              <svg viewBox="0 0 120 120" focusable="false" aria-hidden="true">
-                <defs>
-                  <path id="badgeArc" fill="none"
-                        d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0"/>
-                </defs>
-                <text class="about__badge-text">
-                  <textPath href="#badgeArc" startOffset="0%">
-                    5+ YEARS OF WIG ARTISTRY &#183; HOUSTON, TX &#183;
-                  </textPath>
-                </text>
-              </svg>
-              <span class="about__badge-value">5<small>+</small></span>
-              <span class="visually-hidden">Five or more years of wig artistry in Houston, Texas.</span>
-            </div>
-          </div>
-
-          <div class="about__content">
+        <div class="section-head">
+          <div class="section-head__lead">
             <p class="section-eyebrow">
               <span class="section-eyebrow__mark" aria-hidden="true">
                 <svg viewBox="0 0 16 16" fill="none" focusable="false">
-                  <path d="M8 1.6v12.8M2.5 4.4l11 7.2M13.5 4.4l-11 7.2" stroke="currentColor"
-                        stroke-width="1.9" stroke-linecap="round"/>
+                  <rect x="4" y="4" width="8" height="8" rx="1.5" fill="currentColor"/>
                 </svg>
               </span>
-              About Me
+              The Fine Print
             </p>
-
-            <h2 class="section-title">
-              Crafted by <span class="section-title__accent">hand</span>.
-              Trusted across <span class="section-title__accent">Houston</span>.
-            </h2>
-
-            <p class="about__lede">
-              I&rsquo;m Jordan, and I&rsquo;ve been installing and customizing units in
-              Houston for over five years. What started as doing my own hair in a
-              dorm mirror turned into a chair that stays booked &mdash; because I
-              treat every unit like it&rsquo;s going on my own head. No rushed melts,
-              no cookie-cutter installs, no leaving you with something you
-              don&rsquo;t know how to maintain.
-            </p>
-
-            <div class="about__actions">
-              <a class="btn btn--primary" href="#contact">
-                <span class="btn__label">More About Me</span>
-              </a>
-
-              <div class="about__stylist">
-                <img class="about__stylist-avatar" src="images/about/about-avatar.jpg"
-                     width="128" height="128" alt="" loading="lazy" decoding="async">
-                <span class="about__stylist-meta">
-                  <span class="about__stylist-name">Jordan</span>
-                  <span class="about__stylist-role">Licensed Stylist &amp; Wig Specialist</span>
-                </span>
-              </div>
-            </div>
+            <h2 class="section-title">Booking <span class="section-title__accent">policies</span></h2>
           </div>
 
+          <div class="section-head__aside">
+            <p class="section-intro">
+              Nothing here is meant to be strict for its own sake &mdash; it just
+              keeps every chair on time and every client getting my full
+              attention.
+            </p>
+
+            <div class="carousel__nav">
+              <button class="carousel__btn" type="button" data-carousel-prev aria-label="Previous policy">
+                <svg viewBox="0 0 24 24" fill="none" focusable="false" aria-hidden="true">
+                  <path d="M19 12H5m0 0 6-6m-6 6 6 6" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <button class="carousel__btn" type="button" data-carousel-next aria-label="Next policy">
+                <svg viewBox="0 0 24 24" fill="none" focusable="false" aria-hidden="true">
+                  <path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
 
-        <ul class="about__facts">
-          <li class="fact-card">
-            <span class="fact-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" focusable="false"><path d="M12 3.4 4.8 6.6v5.1c0 4.3 3 8.3 7.2 9.3 4.2-1 7.2-5 7.2-9.3V6.6L12 3.4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m9 12 2.1 2.1L15.3 10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            <h3 class="fact-card__title">My Promise</h3>
-            <p class="fact-card__text">One client at a time, never double-booked. You get my full attention from wash to final curl.</p>
-          </li>
-          <li class="fact-card">
-            <span class="fact-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" focusable="false"><circle cx="12" cy="12" r="8.4" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="3.4" stroke="currentColor" stroke-width="1.7"/><path d="M12 1.8v3M12 19.2v3M22.2 12h-3M4.8 12h-3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-            </span>
-            <h3 class="fact-card__title">My Approach</h3>
-            <p class="fact-card__text">Your face shape, your lifestyle, your budget. We plan the unit together before a single knot gets bleached.</p>
-          </li>
-          <li class="fact-card fact-card--stat">
-            <p class="fact-card__value">500<span>+</span></p>
-            <p class="fact-card__label">units installed</p>
-          </li>
-        </ul>
+        <div class="policies__viewport" data-carousel-viewport>
+          <ul class="policies__track">
+            <li class="policy-card">
+              <span class="policy-card__num" aria-hidden="true">01</span>
+              <span class="policy-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" focusable="false"><rect x="2.8" y="5.5" width="18.4" height="13" rx="2.4" stroke="currentColor" stroke-width="1.7"/><path d="M2.8 9.8h18.4" stroke="currentColor" stroke-width="1.7"/><path d="M6.4 14.6h3.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              </span>
+              <h3 class="policy-card__title">Payment</h3>
+              <p class="policy-card__text">Payment is settled once your service is finished. Cash, card, Zelle, and Cash App all work. Completed services can&rsquo;t be refunded.</p>
+            </li>
+            <li class="policy-card">
+              <span class="policy-card__num" aria-hidden="true">02</span>
+              <span class="policy-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" focusable="false"><path d="M20.4 12a8.4 8.4 0 0 1-14.3 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M3.6 12a8.4 8.4 0 0 1 14.3-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M17.4 2.4v3.8h-3.8M6.6 21.6v-3.8h3.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <h3 class="policy-card__title">Rescheduling</h3>
+              <p class="policy-card__text">Need a different day? Move your appointment at least 24 hours ahead. Repeated changes may call for a fresh deposit.</p>
+            </li>
+            <li class="policy-card">
+              <span class="policy-card__num" aria-hidden="true">03</span>
+              <span class="policy-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" focusable="false"><circle cx="12" cy="12" r="8.6" stroke="currentColor" stroke-width="1.7"/><path d="M12 7.2V12l3.2 2.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <h3 class="policy-card__title">Late Arrival</h3>
+              <p class="policy-card__text">You have a fifteen-minute grace window. After that your service may be shortened or moved, and a late fee can apply.</p>
+            </li>
+            <li class="policy-card">
+              <span class="policy-card__num" aria-hidden="true">04</span>
+              <span class="policy-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" focusable="false"><circle cx="12" cy="12" r="8.6" stroke="currentColor" stroke-width="1.7"/><path d="m9.2 9.2 5.6 5.6M14.8 9.2l-5.6 5.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              </span>
+              <h3 class="policy-card__title">Cancellations</h3>
+              <p class="policy-card__text">Cancel a full day before your slot and the deposit carries over. Same-day cancellations and no-shows release it.</p>
+            </li>
+            <li class="policy-card">
+              <span class="policy-card__num" aria-hidden="true">05</span>
+              <span class="policy-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" focusable="false"><rect x="3.2" y="5" width="17.6" height="15.4" rx="2.4" stroke="currentColor" stroke-width="1.7"/><path d="M3.2 9.6h17.6M8.2 2.8v4M15.8 2.8v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              </span>
+              <h3 class="policy-card__title">Studio Hours</h3>
+              <p class="policy-card__text">Tuesday through Saturday, 9am to 7pm, by appointment only. Sundays and Mondays are set aside for rest and restocking.</p>
+            </li>
+            <li class="policy-card">
+              <span class="policy-card__num" aria-hidden="true">06</span>
+              <span class="policy-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" focusable="false"><circle cx="9.4" cy="8.6" r="3.6" stroke="currentColor" stroke-width="1.7"/><path d="M3.4 20.2c.5-3.4 2.9-5.4 6-5.4s5.5 2 6 5.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M16.6 6.2a3.4 3.4 0 0 1 0 6.6M17.8 15.4c2.2.6 3.6 2.4 4 4.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              </span>
+              <h3 class="policy-card__title">Guests &amp; Kids</h3>
+              <p class="policy-card__text">The studio seats one client at a time. Please come on your own so everyone gets a calm, unhurried appointment.</p>
+            </li>
+          </ul>
+        </div>
 
       </div>
-
-      <span class="section-divider section-divider--bottom" aria-hidden="true"><svg viewBox="0 0 1000 100" preserveAspectRatio="none" focusable="false"><path d="M1000 0H0v52C62.5 28 125 4 250 4c250 0 250 96 500 96 125 0 187.5-24 250-48V0Z" fill="currentColor"/></svg></span>
-
     </section>
-
 
     <!-- ==========================================================================
          GALLERY
@@ -695,14 +681,137 @@
 
 
     <!-- ==========================================================================
+         ABOUT
+         The one light section on the page. Rather than overriding every colour,
+         it redefines the theme tokens on itself, so buttons, cards and type
+         invert automatically. The wave dividers carry the dark sections above
+         and below into it.
+         ========================================================================== -->
+    <section class="section section--light about" id="about">
+
+      <div class="hearts hearts--about" aria-hidden="true">
+        <span class="heart heart--1"></span>
+        <span class="heart heart--2"></span>
+        <span class="heart heart--3"></span>
+        <span class="heart heart--4"></span>
+      </div>
+
+      <span class="section-divider section-divider--top" aria-hidden="true"><svg viewBox="0 0 1000 100" preserveAspectRatio="none" focusable="false"><path d="M1000 0H0v52C62.5 28 125 4 250 4c250 0 250 96 500 96 125 0 187.5-24 250-48V0Z" fill="currentColor"/></svg></span>
+
+      <div class="container">
+
+        <div class="about__grid">
+
+          <div class="about__media">
+            <figure class="about__photo">
+              <picture>
+                <source type="image/webp" media="(min-width: 48em)"
+                        srcset="images/about/about-jordan.webp" width="640" height="800">
+                <source type="image/jpeg" media="(min-width: 48em)"
+                        srcset="images/about/about-jordan.jpg" width="640" height="800">
+                <source type="image/webp"
+                        srcset="images/about/about-jordan-m.webp" width="460" height="575">
+                <img src="images/about/about-jordan-m.jpg" width="460" height="575"
+                     alt="Jordan, wig stylist, wearing a reddish-brown body-wave unit she installed."
+                     loading="lazy" decoding="async">
+              </picture>
+            </figure>
+
+            <!-- Circular badge. The text rides an SVG path, so it curves for real
+                 instead of being a picture of curved text. -->
+            <div class="about__badge">
+              <svg viewBox="0 0 120 120" focusable="false" aria-hidden="true">
+                <defs>
+                  <path id="badgeArc" fill="none"
+                        d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0"/>
+                </defs>
+                <text class="about__badge-text">
+                  <textPath href="#badgeArc" startOffset="0%">
+                    5+ YEARS OF WIG ARTISTRY &#183; HOUSTON, TX &#183;
+                  </textPath>
+                </text>
+              </svg>
+              <span class="about__badge-value">5<small>+</small></span>
+              <span class="visually-hidden">Five or more years of wig artistry in Houston, Texas.</span>
+            </div>
+          </div>
+
+          <div class="about__content">
+            <p class="section-eyebrow">
+              <span class="section-eyebrow__mark" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none" focusable="false">
+                  <path d="M8 1.6v12.8M2.5 4.4l11 7.2M13.5 4.4l-11 7.2" stroke="currentColor"
+                        stroke-width="1.9" stroke-linecap="round"/>
+                </svg>
+              </span>
+              About Me
+            </p>
+
+            <h2 class="section-title">
+              Crafted by <span class="section-title__accent">hand</span>.
+              Trusted across <span class="section-title__accent">Houston</span>.
+            </h2>
+
+            <p class="about__lede">
+              I&rsquo;m Jordan, and I&rsquo;ve been installing and customizing units in
+              Houston for over five years. What started as doing my own hair in a
+              dorm mirror turned into a chair that stays booked &mdash; because I
+              treat every unit like it&rsquo;s going on my own head. No rushed melts,
+              no cookie-cutter installs, no leaving you with something you
+              don&rsquo;t know how to maintain.
+            </p>
+
+            <div class="about__actions">
+              <a class="btn btn--primary" href="#contact">
+                <span class="btn__label">More About Me</span>
+              </a>
+
+              <div class="about__stylist">
+                <img class="about__stylist-avatar" src="images/about/about-avatar.jpg"
+                     width="128" height="128" alt="" loading="lazy" decoding="async">
+                <span class="about__stylist-meta">
+                  <span class="about__stylist-name">Jordan</span>
+                  <span class="about__stylist-role">Licensed Stylist &amp; Wig Specialist</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <ul class="about__facts">
+          <li class="fact-card">
+            <span class="fact-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" focusable="false"><path d="M12 3.4 4.8 6.6v5.1c0 4.3 3 8.3 7.2 9.3 4.2-1 7.2-5 7.2-9.3V6.6L12 3.4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m9 12 2.1 2.1L15.3 10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <h3 class="fact-card__title">My Promise</h3>
+            <p class="fact-card__text">One client at a time, never double-booked. You get my full attention from wash to final curl.</p>
+          </li>
+          <li class="fact-card">
+            <span class="fact-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" focusable="false"><circle cx="12" cy="12" r="8.4" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="3.4" stroke="currentColor" stroke-width="1.7"/><path d="M12 1.8v3M12 19.2v3M22.2 12h-3M4.8 12h-3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </span>
+            <h3 class="fact-card__title">My Approach</h3>
+            <p class="fact-card__text">Your face shape, your lifestyle, your budget. We plan the unit together before a single knot gets bleached.</p>
+          </li>
+          <li class="fact-card fact-card--stat">
+            <p class="fact-card__value">500<span>+</span></p>
+            <p class="fact-card__label">units installed</p>
+          </li>
+        </ul>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==========================================================================
          FAQ
          Categories are a vertical tablist; each panel is an accordion. On large
          screens the sidebar sticks so the column never reads as empty space
          while the answers scroll past.
          ========================================================================== -->
     <section class="section section--light faq" id="faq">
-
-      <span class="section-divider section-divider--top" aria-hidden="true"><svg viewBox="0 0 1000 100" preserveAspectRatio="none" focusable="false"><path d="M1000 0H0v52C62.5 28 125 4 250 4c250 0 250 96 500 96 125 0 187.5-24 250-48V0Z" fill="currentColor"/></svg></span>
 
       <div class="hearts hearts--faq" aria-hidden="true">
         <span class="heart heart--1"></span>

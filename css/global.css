@@ -407,13 +407,20 @@ p { text-wrap: pretty; }
 .site-logo__mark {
   display: grid;
   place-items: center;
-  width: 2rem;
-  height: 2rem;
+  width: 2.125rem;
+  height: 2.125rem;
   color: var(--color-pink);
   transition: transform var(--speed) var(--ease-out);
 }
 
-.site-logo:hover .site-logo__mark { transform: rotate(-8deg) scale(1.06); }
+.site-logo__mark svg { width: 100%; height: 100%; }
+
+/* The ring is a quieter supporting element than the strands. */
+.site-logo__ring { opacity: 0.38; }
+
+.site-logo:hover .site-logo__mark { transform: rotate(-6deg) scale(1.06); }
+
+.site-logo:hover .site-logo__ring { opacity: 0.75; }
 
 .site-logo__text em {
   color: var(--color-pink);
@@ -1089,6 +1096,7 @@ p { text-wrap: pretty; }
 /* Shared scroller behaviour. The scrollbar is hidden because the arrows and
    the snap points already communicate that there is more to see. */
 .services__viewport,
+.policies__viewport,
 .gallery__viewport {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -1096,4 +1104,5 @@ p { text-wrap: pretty; }
 }
 
 .services__viewport::-webkit-scrollbar,
+.policies__viewport::-webkit-scrollbar,
 .gallery__viewport::-webkit-scrollbar { display: none; }

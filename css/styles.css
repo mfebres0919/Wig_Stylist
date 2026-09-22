@@ -10,10 +10,11 @@
      2. Hearts (per-section placement)
      3. Marquee
      4. Services
-     5. About
-     6. Gallery
-     7. FAQ
-     8. Contact
+     5. Policies
+     6. About
+     7. Gallery
+     8. FAQ
+     9. Contact
    ========================================================================== */
 
 
@@ -1520,6 +1521,7 @@
 .contact-form__grid {
   display: grid;
   gap: 0.875rem;
+  margin-bottom: 1rem;
 }
 
 .form-field { margin-bottom: 0.875rem; }
@@ -1630,4 +1632,129 @@
   }
 
   .contact__card { padding: 2.75rem 2.5rem 3rem; }
+}
+
+
+/* ==========================================================================
+   5. POLICIES
+   ========================================================================== */
+
+.policies { position: relative; }
+
+.policies .section-head__aside {
+  gap: 1.75rem;
+}
+
+.policies__viewport {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  /* Bleeds to both screen edges so a partial next card hints at more. */
+  margin-inline: calc(var(--gutter) * -1);
+  padding-inline: var(--gutter);
+  scroll-padding-inline: var(--gutter);
+}
+
+.policies__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 78%;
+  gap: 1.25rem;
+}
+
+.policy-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.75rem 1.5rem 2rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  scroll-snap-align: start;
+  transition: border-color var(--speed) var(--ease-out),
+              transform var(--speed) var(--ease-out);
+}
+
+.policy-card:hover {
+  border-color: var(--color-border-pink);
+  transform: translateY(-4px);
+}
+
+/* Oversized faint index. background-clip:text lets it fade top-to-bottom
+   instead of sitting at one flat opacity. */
+.policy-card__num {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: clamp(3.75rem, 12vw, 5rem);
+  font-weight: 800;
+  /* line-height 1: anything tighter clips the glyphs against the title. */
+  line-height: 1;
+  letter-spacing: -0.04em;
+  background-image: linear-gradient(to bottom,
+                    rgba(232, 44, 214, 0.5), rgba(232, 44, 214, 0.14));
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  pointer-events: none;
+}
+
+.policy-card__icon {
+  position: absolute;
+  top: 1.75rem;
+  right: 1.5rem;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  color: var(--color-pink);
+  border: 1px solid var(--color-border-pink);
+  border-radius: var(--radius-md);
+  transition: background-color var(--speed) var(--ease-out),
+              color var(--speed) var(--ease-out);
+}
+
+.policy-card__icon svg { width: 1.5rem; height: 1.5rem; }
+
+.policy-card:hover .policy-card__icon {
+  background-color: var(--color-pink);
+  color: var(--color-white);
+}
+
+.policy-card__title {
+  margin-bottom: 0.625rem;
+  font-size: 1.1875rem;
+  line-height: 1.25;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.policy-card__text {
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+
+
+/* ==========================================================================
+   POLICIES — 48em and up
+   ========================================================================== */
+
+@media (min-width: 48em) {
+  .policies__track { grid-auto-columns: 20rem; }
+}
+
+
+/* ==========================================================================
+   POLICIES — 64em and up
+   ========================================================================== */
+
+@media (min-width: 64em) {
+
+  .policies .section-head__aside {
+    align-items: flex-start;
+  }
+
+  .policies__track { grid-auto-columns: 21.5rem; gap: 1.5rem; }
+
+  .policy-card { padding: 2rem 1.75rem 2.25rem; }
 }
