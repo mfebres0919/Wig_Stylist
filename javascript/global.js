@@ -490,4 +490,76 @@
     });
   });
 
+
+  /* ========================================================================
+     11. STUDIO HOURS BADGE
+     Fills in Open / Closed beside the hero's opening hours. Evaluated in the
+     studio's own timezone, not the visitor's — someone browsing from London
+     should still see whether the Houston chair is open right now.
+
+     The hours themselves are in the markup, so with JS off the badge still
+     reads correctly; this only adds the live status.
+     ======================================================================== */
+
+  var STUDIO = {
+    zone: 'America/Chicago',
+    open: 9,          /* 9am */
+    close: 19,        /* 7pm */
+    days: [2, 3, 4, 5, 6]   /* Tue-Sat, with Sunday as 0 */
+  };
+
+  var DAY_INDEX = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+
+  function studioClock() {
+    /* Intl does the timezone and DST arithmetic; doing it by hand with UTC
+       offsets breaks twice a year. */
+    var parts = new Intl.DateTimeFormat('en-US', {
+      timeZone: STUDIO.zone,
+      weekday: 'short',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: false
+    }).formatToParts(new Date());
+
+    var out = {};
+    parts.forEach(function (part) { out[part.type] = part.value; });
+
+    return {
+      day: DAY_INDEX[out.weekday],
+      /* Some locales render midnight as 24; normalise it. */
+      hour: parseInt(out.hour, 10) % 24,
+      minute: parseInt(out.minute, 10)
+    };
+  }
+
+  Array.prototype.slice.call(document.querySelectorAll('[data-hours]')).forEach(function (badge) {
+    var status = badge.querySelector('[data-hours-status]');
+    if (!status || typeof Intl === 'undefined' || !Intl.DateTimeFormat) return;
+
+    function render() {
+      var now;
+      try {
+        now = studioClock();
+      } catch (err) {
+        return;   /* no timezone data: leave the plain hours showing */
+      }
+      if (isNaN(now.day) || isNaN(now.hour)) return;
+
+      var isOpenDay = STUDIO.days.indexOf(now.day) !== -1;
+      var minutes = now.hour * 60 + now.minute;
+      var isOpen = isOpenDay &&
+                   minutes >= STUDIO.open * 60 &&
+                   minutes < STUDIO.close * 60;
+
+      status.textContent = isOpen ? 'Open now' : 'Closed';
+      badge.classList.toggle('is-open', isOpen);
+      badge.classList.toggle('is-closed', !isOpen);
+    }
+
+    render();
+    /* Re-check each minute so the badge flips on its own if someone leaves
+       the page open across opening or closing time. */
+    window.setInterval(render, 60000);
+  });
+
 })();

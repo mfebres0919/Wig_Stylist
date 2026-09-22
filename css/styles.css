@@ -77,6 +77,77 @@
   align-items: flex-start;
 }
 
+/* --- Availability badge --- */
+
+.hero__hours {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding: 0.4375rem 0.9375rem 0.4375rem 0.75rem;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  color: var(--color-white);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.hero__hours-dot {
+  position: relative;
+  width: 0.5rem;
+  height: 0.5rem;
+  flex-shrink: 0;
+  background-color: var(--color-text-muted);
+  border-radius: 50%;
+}
+
+/* Open: a pink dot with a halo pulsing out of it. The halo is a pseudo-element
+   so the dot itself stays a crisp, constant size. */
+.hero__hours.is-open .hero__hours-dot { background-color: var(--color-pink); }
+
+.hero__hours.is-open .hero__hours-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: var(--color-pink);
+  animation: hours-pulse 2.4s ease-out infinite;
+}
+
+@keyframes hours-pulse {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  100% { transform: scale(2.8); opacity: 0; }
+}
+
+/* Empty until global.js fills it, so nothing shows with JS off. */
+.hero__hours-status:empty { display: none; }
+
+.hero__hours-status { color: var(--color-pink); }
+
+.hero__hours.is-closed .hero__hours-status { color: var(--color-text-muted); }
+
+/* A dot separator, drawn rather than typed so it can't be read aloud. */
+.hero__hours-status:not(:empty) + .hero__hours-text::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  margin-inline: 0.5rem 0.625rem;
+  vertical-align: middle;
+  background-color: currentColor;
+  border-radius: 50%;
+  opacity: 0.45;
+}
+
+.hero__hours-text { color: var(--color-text-muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__hours.is-open .hero__hours-dot::after { animation: none; opacity: 0; }
+}
+
 .hero__title {
   display: flex;
   flex-direction: column;
@@ -157,6 +228,23 @@
   justify-self: center;
   width: min(19rem, 82vw);
   aspect-ratio: 777 / 753;
+
+  /* Slow rocking tilt. It lives on the figure, not the <img>, so the img's
+     drop-shadow is rasterised once and the whole layer is simply rotated —
+     putting the rotation on the filtered element itself would re-run the
+     shadow every frame. Transform is composited, so this stays off the
+     main thread. */
+  transform-origin: 50% 88%;   /* pivots near the base, so the phones sway */
+  animation: hero-tilt 9s ease-in-out infinite;
+}
+
+@keyframes hero-tilt {
+  0%, 100% { transform: rotate(-2deg); }
+  50%      { transform: rotate(2deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__portrait { animation: none; }
 }
 
 /* Soft pink bloom behind the phones, standing in for the ring the circles had. */

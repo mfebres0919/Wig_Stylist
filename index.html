@@ -165,6 +165,14 @@
       <div class="hero__inner">
 
         <div class="hero__content">
+          <!-- Hours are static so they read correctly with JS off; global.js
+               then fills the status span with Open/Closed. -->
+          <p class="hero__hours" data-hours>
+            <span class="hero__hours-dot" aria-hidden="true"></span>
+            <span class="hero__hours-status" data-hours-status></span>
+            <span class="hero__hours-text">Tue&ndash;Sat &middot; 9am&ndash;7pm</span>
+          </p>
+
           <h1 class="hero__title">
             <span class="hero__title-top">Hair by</span>
             <span class="hero__title-name">Jordan</span>
@@ -176,11 +184,11 @@
           </p>
 
           <div class="hero__actions">
-            <a class="btn btn--primary" href="#contact">
+            <a class="btn btn--primary" href="#services">
               <span class="btn__label">Book Now</span>
             </a>
-            <a class="btn btn--secondary" href="#services">
-              <span class="btn__label">View Services</span>
+            <a class="btn btn--secondary" href="#gallery">
+              <span class="btn__label">View Gallery</span>
             </a>
           </div>
 
@@ -192,7 +200,7 @@
                 <circle cx="12" cy="10" r="2.6" stroke="currentColor" stroke-width="1.9"/>
               </svg>
             </span>
-            Houston, Texas
+            Located in Houston, Texas
           </p>
         </div>
 

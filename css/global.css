@@ -334,6 +334,18 @@ p { text-wrap: pretty; }
   right: 0;
   z-index: var(--z-header);
   background-color: transparent;
+
+  /* The bar is light, so it redefines the theme tokens on itself and the
+     links, drawer, dropdown and borders all invert together. --color-white
+     is deliberately NOT overridden: it still means white, for icon glyphs
+     sitting on pink. */
+  --color-text: var(--color-text-dark);
+  --color-text-muted: #5C5563;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F3EFF5;
+  --color-border: rgba(11, 11, 13, 0.12);
+
+  color: var(--color-text);
 }
 
 /* The tint and blur live on a pseudo-element, NOT on .site-header itself.
@@ -349,14 +361,14 @@ p { text-wrap: pretty; }
   position: absolute;
   inset: 0;
   z-index: -1;
-  background-color: rgba(11, 11, 13, 0.28);
+  background-color: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   pointer-events: none;
   transition: background-color var(--speed) var(--ease-out);
 }
 
-.site-header.is-scrolled::before { background-color: rgba(11, 11, 13, 0.86); }
+.site-header.is-scrolled::before { background-color: var(--color-white); }
 
 /* The separator is a pseudo-element, not a border, so it can fade out toward
    both edges instead of ending in hard corners. */
@@ -369,9 +381,9 @@ p { text-wrap: pretty; }
   height: 1px;
   background: linear-gradient(90deg,
               transparent,
-              rgba(255, 255, 255, 0.28) 20%,
+              rgba(11, 11, 13, 0.12) 20%,
               var(--color-border-pink) 50%,
-              rgba(255, 255, 255, 0.28) 80%,
+              rgba(11, 11, 13, 0.12) 80%,
               transparent);
   opacity: 0.85;
   transition: opacity var(--speed) var(--ease-out);
@@ -394,6 +406,7 @@ p { text-wrap: pretty; }
 /* --- Logo --- */
 
 .site-logo {
+  color: var(--color-text);
   display: inline-flex;
   align-items: center;
   gap: 0.625rem;
@@ -449,7 +462,7 @@ p { text-wrap: pretty; }
   display: block;
   width: 1.5rem;
   height: 2px;
-  background-color: var(--color-white);
+  background-color: var(--color-text);
   border-radius: 2px;
   transition: transform var(--speed) var(--ease-out),
               opacity var(--speed-fast) linear;
@@ -479,7 +492,7 @@ p { text-wrap: pretty; }
   gap: 1.5rem;
   width: min(20rem, 82vw);
   padding: calc(var(--header-height) + 1.5rem) 1.75rem 2rem;
-  background-color: var(--color-black);
+  background-color: var(--color-surface);
   border-left: 1px solid var(--color-border);
   overflow-y: auto;
   transform: translateX(100%);
@@ -511,7 +524,7 @@ p { text-wrap: pretty; }
   padding: 0.9375rem 0;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--color-white);
+  color: var(--color-text);
   text-align: left;
   transition: color var(--speed-fast) var(--ease-out);
 }
@@ -586,10 +599,12 @@ p { text-wrap: pretty; }
   place-items: center;
   width: 2.5rem;
   height: 2.5rem;
+  border: 1px solid var(--color-pink);
   border-radius: 50%;
-  color: var(--color-white);
+  color: var(--color-pink);
   transition: color var(--speed-fast) var(--ease-out),
               background-color var(--speed-fast) var(--ease-out),
+              border-color var(--speed-fast) var(--ease-out),
               transform var(--speed-fast) var(--ease-out);
 }
 
@@ -597,6 +612,9 @@ p { text-wrap: pretty; }
 
 .social-links__link:hover {
   background-color: var(--color-pink);
+  border-color: var(--color-pink);
+  /* Always literal white here, even inside the light header, because the
+     glyph is sitting on solid pink. */
   color: var(--color-white);
   transform: translateY(-2px);
 }
@@ -694,7 +712,7 @@ p { text-wrap: pretty; }
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+    box-shadow: 0 18px 40px rgba(11, 11, 13, 0.16);
 
     /* Fade + lift in. visibility is delayed on the way out so the panel is
        still hoverable while it animates, then goes untabbable once hidden. */
@@ -750,7 +768,7 @@ p { text-wrap: pretty; }
 
   .dropdown__link:hover {
     background-color: var(--color-surface-alt);
-    color: var(--color-white);
+    color: var(--color-text);
     padding-left: 1.125rem;
   }
 
