@@ -424,7 +424,10 @@
          advances one card every 5s and stops on hover, focus, manual input,
          a hidden tab, or a reduced-motion preference.
          ========================================================================== -->
-    <section class="section policies" id="policies" data-carousel data-carousel-autoplay="5000">
+    <section class="section section--light policies" id="policies"
+             data-carousel data-carousel-autoplay="5000">
+
+      <span class="section-divider section-divider--top" aria-hidden="true"><svg viewBox="0 0 1000 100" preserveAspectRatio="none" focusable="false"><path d="M1000 0H0v52C62.5 28 125 4 250 4c250 0 250 96 500 96 125 0 187.5-24 250-48V0Z" fill="currentColor"/></svg></span>
 
       <div class="container">
 
@@ -519,6 +522,8 @@
         </div>
 
       </div>
+      <span class="section-divider section-divider--bottom" aria-hidden="true"><svg viewBox="0 0 1000 100" preserveAspectRatio="none" focusable="false"><path d="M1000 0H0v52C62.5 28 125 4 250 4c250 0 250 96 500 96 125 0 187.5-24 250-48V0Z" fill="currentColor"/></svg></span>
+
     </section>
 
     <!-- ==========================================================================
@@ -706,13 +711,13 @@
             <figure class="about__photo">
               <picture>
                 <source type="image/webp" media="(min-width: 48em)"
-                        srcset="images/about/about-jordan.webp" width="640" height="800">
+                        srcset="images/about/about-jordan.webp" width="820" height="1025">
                 <source type="image/jpeg" media="(min-width: 48em)"
-                        srcset="images/about/about-jordan.jpg" width="640" height="800">
+                        srcset="images/about/about-jordan.jpg" width="820" height="1025">
                 <source type="image/webp"
-                        srcset="images/about/about-jordan-m.webp" width="460" height="575">
-                <img src="images/about/about-jordan-m.jpg" width="460" height="575"
-                     alt="Jordan, wig stylist, wearing a reddish-brown body-wave unit she installed."
+                        srcset="images/about/about-jordan-m.webp" width="520" height="650">
+                <img src="images/about/about-jordan-m.jpg" width="520" height="650"
+                     alt="Jordan in the studio wearing a long, ash-blonde body-wave unit with a deep side part."
                      loading="lazy" decoding="async">
               </picture>
             </figure>
@@ -768,7 +773,7 @@
 
               <div class="about__stylist">
                 <img class="about__stylist-avatar" src="images/about/about-avatar.jpg"
-                     width="128" height="128" alt="" loading="lazy" decoding="async">
+                     width="144" height="144" alt="" loading="lazy" decoding="async">
                 <span class="about__stylist-meta">
                   <span class="about__stylist-name">Jordan</span>
                   <span class="about__stylist-role">Licensed Stylist &amp; Wig Specialist</span>
@@ -803,6 +808,35 @@
       </div>
 
     </section>
+
+
+    <!-- ==========================================================================
+         MARQUEE
+         The track holds two identical groups and slides one full group's width,
+         so the loop is seamless. The second group is a visual duplicate and is
+         hidden from screen readers.
+         ========================================================================== -->
+    <section class="marquee" aria-label="What we offer">
+      <div class="marquee__track">
+        <ul class="marquee__group">
+          <li class="marquee__item">Custom Wig Installs</li>
+          <li class="marquee__item">Frontal Sew-Ins</li>
+          <li class="marquee__item">Color &amp; Customization</li>
+          <li class="marquee__item">Wig Revamps</li>
+          <li class="marquee__item">Bridal &amp; Events</li>
+          <li class="marquee__item">Houston, Texas</li>
+        </ul>
+        <ul class="marquee__group" aria-hidden="true">
+          <li class="marquee__item">Custom Wig Installs</li>
+          <li class="marquee__item">Frontal Sew-Ins</li>
+          <li class="marquee__item">Color &amp; Customization</li>
+          <li class="marquee__item">Wig Revamps</li>
+          <li class="marquee__item">Bridal &amp; Events</li>
+          <li class="marquee__item">Houston, Texas</li>
+        </ul>
+      </div>
+    </section>
+
 
 
     <!-- ==========================================================================
@@ -1507,6 +1541,117 @@
     </section>
 
   </main>
+
+
+  <footer class="site-footer">
+
+    <div class="container site-footer__inner">
+
+      <div class="site-footer__brand">
+        <a class="site-logo" href="#hero">
+          <span class="site-logo__mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none" focusable="false">
+              <circle class="site-logo__ring" cx="20" cy="20" r="18.4"
+                      stroke="currentColor" stroke-width="1.5"/>
+              <path d="M13.4 9c-4.2 4.4-4.2 7.6 0 12s4.2 7.6 0 12"
+                    stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/>
+              <path d="M20 7.6c-4.6 4.8-4.6 8.3 0 13.1s4.6 8.3 0 13.1"
+                    stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/>
+              <path d="M26.6 9c-4.2 4.4-4.2 7.6 0 12s4.2 7.6 0 12"
+                    stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="site-logo__text">Hair by <em>Jordan</em></span>
+        </a>
+
+        <p class="site-footer__tagline">
+          Custom wig installs, colour and revamps in Houston, Texas.
+          One client at a time, never rushed.
+        </p>
+
+          <ul class="social-links social-links--footer" aria-label="Social media">
+            <li>
+            <a class="social-links__link" href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" focusable="false" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/>
+                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/>
+                <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
+              </svg>
+            </a>
+            </li>
+            <li>
+            <a class="social-links__link" href="#" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="none" focusable="false" aria-hidden="true">
+                <path d="M14.5 8.5h2.2V5.6h-2.6c-2.4 0-3.9 1.5-3.9 4v2H8v3h2.2V21h3.1v-6.4h2.4l.5-3h-2.9v-1.6c0-1 .4-1.5 1.2-1.5Z" fill="currentColor"/>
+              </svg>
+            </a>
+            </li>
+            <li>
+            <a class="social-links__link" href="#" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" fill="none" focusable="false" aria-hidden="true">
+                <path d="M14 3h2.6a5.1 5.1 0 0 0 4.4 4.3v2.7a7.8 7.8 0 0 1-4.3-1.4v6.2a5.9 5.9 0 1 1-5.9-5.9c.3 0 .6 0 .9.1v2.8a3.1 3.1 0 1 0 2.2 3V3Z" fill="currentColor"/>
+              </svg>
+            </a>
+            </li>
+          </ul>
+
+      </div>
+
+      <nav class="site-footer__col" aria-label="Footer">
+        <h2 class="site-footer__heading">Explore</h2>
+        <ul class="site-footer__list">
+              <li><a class="site-footer__link" href="#hero">Home</a></li>
+              <li><a class="site-footer__link" href="#services">Services</a></li>
+              <li><a class="site-footer__link" href="#policies">Policies</a></li>
+              <li><a class="site-footer__link" href="#gallery">Gallery</a></li>
+              <li><a class="site-footer__link" href="#about">About</a></li>
+              <li><a class="site-footer__link" href="#faq">FAQ</a></li>
+              <li><a class="site-footer__link" href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="site-footer__col">
+        <h2 class="site-footer__heading">Services</h2>
+        <ul class="site-footer__list">
+              <li><a class="site-footer__link" href="#services">Custom Wig Installs</a></li>
+              <li><a class="site-footer__link" href="#services">Frontal &amp; Closure Sew-Ins</a></li>
+              <li><a class="site-footer__link" href="#services">Color &amp; Customization</a></li>
+              <li><a class="site-footer__link" href="#services">Wig Revamp &amp; Maintenance</a></li>
+        </ul>
+      </div>
+
+      <div class="site-footer__col">
+        <h2 class="site-footer__heading">Visit</h2>
+        <ul class="site-footer__list">
+          <li>
+            <a class="site-footer__link" href="https://maps.google.com/?q=4400+Westheimer+Rd+Houston+TX">
+              Suite 210, 4400 Westheimer Rd<br>Houston, TX
+            </a>
+          </li>
+          <li><a class="site-footer__link" href="tel:+17135550199">+1 (713) 555-0199</a></li>
+          <li><a class="site-footer__link" href="mailto:hello@hairbyjordan.com">hello@hairbyjordan.com</a></li>
+        </ul>
+
+        <p class="site-footer__hours">
+          <span>Tue &ndash; Sat</span>
+          <span>9am &ndash; 7pm</span>
+        </p>
+        <p class="site-footer__hours">
+          <span>Sun &amp; Mon</span>
+          <span>Closed</span>
+        </p>
+      </div>
+
+    </div>
+
+    <div class="site-footer__bar">
+      <div class="container site-footer__bar-inner">
+        <p>&copy; 2026 Hair by Jordan. All rights reserved.</p>
+        <p>By appointment only &middot; Houston, Texas</p>
+      </div>
+    </div>
+
+  </footer>
 
   <!-- Appears once the page has scrolled past the hero. -->
   <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">

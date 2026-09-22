@@ -1106,3 +1106,153 @@ p { text-wrap: pretty; }
 .services__viewport::-webkit-scrollbar,
 .policies__viewport::-webkit-scrollbar,
 .gallery__viewport::-webkit-scrollbar { display: none; }
+
+
+/* ==========================================================================
+   16. SITE FOOTER
+   ========================================================================== */
+
+.site-footer {
+  position: relative;
+  background-color: var(--color-black-deep);
+  /* A pink hairline that fades at both ends, echoing the header's. */
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(90deg,
+                transparent, var(--color-border-pink) 50%, transparent) 1;
+}
+
+.site-footer__inner {
+  display: grid;
+  gap: 2.5rem;
+  padding-block: 3.5rem 2.5rem;
+}
+
+/* --- Brand column --- */
+
+.site-footer__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.site-footer__tagline {
+  max-width: 32ch;
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+/* The nav variant pins itself to the bottom of the drawer and gains a divider
+   at 64em; neither applies down here. This rule sits after that media query in
+   the cascade, so it wins without needing extra specificity. */
+.social-links--footer {
+  margin-top: 0;
+  padding-left: 0;
+  border-left: 0;
+}
+
+/* --- Link columns --- */
+
+.site-footer__heading {
+  margin-bottom: 1.125rem;
+  color: var(--color-white);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.site-footer__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.site-footer__link {
+  display: inline-block;
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  transition: color var(--speed-fast) var(--ease-out),
+              transform var(--speed-fast) var(--ease-out);
+}
+
+.site-footer__link:hover {
+  color: var(--color-pink);
+  transform: translateX(3px);
+}
+
+/* --- Hours --- */
+
+.site-footer__hours {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 15rem;
+  margin-top: 0.75rem;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+.site-footer__hours:first-of-type { margin-top: 1.5rem; }
+
+.site-footer__hours span:last-child {
+  color: var(--color-white);
+  font-weight: 600;
+}
+
+/* --- Bottom bar --- */
+
+.site-footer__bar {
+  border-top: 1px solid var(--color-border);
+}
+
+.site-footer__bar-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding-block: 1.5rem;
+  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+}
+
+/* Clears the floating back-to-top button, which sits in this corner. */
+.site-footer__bar-inner > :last-child { padding-right: 3.5rem; }
+
+
+/* ==========================================================================
+   FOOTER — 48em and up
+   ========================================================================== */
+
+@media (min-width: 48em) {
+
+  .site-footer__inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem 2rem;
+    padding-block: 4.5rem 3rem;
+  }
+
+  .site-footer__brand { grid-column: 1 / -1; }
+}
+
+
+/* ==========================================================================
+   FOOTER — 64em and up
+   ========================================================================== */
+
+@media (min-width: 64em) {
+
+  .site-footer__inner {
+    grid-template-columns: 1.4fr 0.8fr 1fr 1.1fr;
+    gap: 3rem;
+    padding-block: 5rem 3.5rem;
+  }
+
+  .site-footer__brand {
+    grid-column: auto;
+    padding-right: 2rem;
+  }
+}
